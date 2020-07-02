@@ -1,6 +1,12 @@
 # espocrm-hookedformulas
-Creates more sophisticated formulas for EspoCRM
+Creates more formulas possibilities for EspoCRM
 
+* [Introduction](#n1)
+* [Simple example](#n2)
+* [Provided functions](#n3) (-> [Functions](https://github.com/hdijkema/espocrm-hookedformulas/wiki/Functions))
+* [Developing](#n4)
+
+<a name="n1"></a>
 ## Introduction
 This module for [EspoCRM](https://github.com/espocrm/espocrm) adds more sophisticated formula functionality to EspoCRM.
 Instead of only having formulas at the `'beforeSave'` hook, this module will make it possible to implement formulas for other hooks.
@@ -26,6 +32,7 @@ For `afterMassRelate`, following variables are provider:
 
 See [EspoCRM Hooks](https://docs.espocrm.com/development/hooks/) for more information about the hooks.
 
+<a name="n2"></a>
 ### Simple example
 
 In your formula you create sections for the different hooks. The `afterSave` section is implicit, because EspoCRM already provides this in the formulas. It can however be made explicit. Below is a simple formula for a given 'Entity':
@@ -52,11 +59,12 @@ In your formula you create sections for the different hooks. The `afterSave` sec
    end:afterUnrelate
 ```
 
+<a name="n3"></a>
 # Provided functions
 
 HookedFormulas provides a lot of new functions to be used in EspoCRM. For more information see the [Functions](https://github.com/hdijkema/espocrm-hookedformulas/wiki/Functions) section.
 
-
+<a name="n4"></a>
 # Developing
 
 1. Checkout espocrm-hookedformulas to ./HookedFormulas.
