@@ -3,7 +3,7 @@ Creates more formulas possibilities for EspoCRM
 
 * [Introduction](#n1)
 * [Simple example](#n2)
-* [Provided functions](#n3)
+* [Provided functions](#n3) (-> [Functions](https://github.com/hdijkema/espocrm-hookedformulas/wiki/Functions))
 * [Developing](#n4)
 
 <a name="n1"></a>
