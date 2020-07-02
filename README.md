@@ -1,5 +1,5 @@
 # espocrm-hookedformulas
-Creates more formulas possibilities for EspoCRM
+A module that creates more formula possibilities for EspoCRM
 
 * [Introduction](#n1)
 * [Simple example](#n2)
