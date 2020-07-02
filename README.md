@@ -54,7 +54,7 @@ In your formula you create sections for the different hooks. The `afterSave` sec
 
 # Provided functions
 
-HookedFormulas provides a lot of new functions to be used in EspoCRM. For more information see the [Functions]() section.
+HookedFormulas provides a lot of new functions to be used in EspoCRM. For more information see the [Functions](https://github.com/hdijkema/espocrm-hookedformulas/wiki/Functions) section.
 
 
 # Developing
