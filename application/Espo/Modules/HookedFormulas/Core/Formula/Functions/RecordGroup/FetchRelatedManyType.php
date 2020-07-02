@@ -44,7 +44,7 @@ class FetchRelatedManyType extends \Espo\Core\Formula\Functions\Base
     {
         $args = $this->fetchArguments($item);
 
-        if (count($args) < 5) {
+        if (count($args) < 4) {
             throw new Error("Formula record\\fetchRelatedMany: Too few arguments.");
         }
 
@@ -54,16 +54,15 @@ class FetchRelatedManyType extends \Espo\Core\Formula\Functions\Base
         $id = $args[1];
         $link = $args[2];
         $items = $args[3];
-        $limit = $args[4];
 
         $orderBy = null;
         $order = null;
 
-        if (count($args) > 5) {
-            $orderBy = $args[5];
+        if (count($args) > 4) {
+            $orderBy = $args[4];
         }
-        if (count($args) > 6) {
-            $order = $args[6];
+        if (count($args) > 5) {
+            $order = $args[5];
         }
 
         if (!$entityType) throw new Error("Formula record\\fetchRelatedMany: Empty entityType.");
@@ -121,32 +120,27 @@ class FetchRelatedManyType extends \Espo\Core\Formula\Functions\Base
             $selectParams['whereClause'][] = [$foreignLink . '.id' => $entity->id];
         }
 
-        if (count($args) <= 8) {
-            $filter = null;
-            if (count($args) == 8) {
-                $filter = $args[7];
-            }
-            if ($filter) {
-                if (!is_string($filter)) throw new Error("Formula record\\fetchRelatedMany: Bad filter.");
-                $selectManager->applyFilter($filter, $selectParams);
-            }
-        } else {
-            $i = 7;
-            while ($i < count($args) - 1) {
-                $key = $args[$i];
-                $value = $args[$i + 1];
+        $i = 6;
+        while ($i < count($args) - 1) {
+            $key = $args[$i];
+            $value = $args[$i + 1];
 
-                if ($key == 'limit by') {
-                    $selectParams['limit'] = $value + 0;
-                } else {
-                    $selectParams['whereClause'][] = [$key => $value];
-                }
-
-                $i = $i + 2;
+            if ($key == 'limit by') {
+                $selectParams['limit'] = $value + 0;
+            } else {
+            	if ($key == 'use filter') {
+            		$filter = $value;
+		            if ($filter) {
+		                if (!is_string($filter)) throw new Error("Formula record\\fetchRelatedMany: Bad filter.");
+		                $selectManager->applyFilter($filter, $selectParams);
+		            }                		
+            	} else {
+                	$selectParams['whereClause'][] = [$key => $value];
+            	}
             }
+
+            $i = $i + 2;
         }
-
-        $selectParams['limit'] = $limit;
 
         if ($orderBy) {
             $selectManager->applyOrder($orderBy, $order, $selectParams);

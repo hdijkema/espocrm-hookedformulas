@@ -61,30 +61,27 @@ class FetchManyHashType extends \Espo\Core\Formula\Functions\Base
         $selectManager = $this->getInjection('selectManagerFactory')->create($entityType);
         $selectParams = $selectManager->getEmptySelectParams();
 
-        if (count($item->value) <= 5) {
-            $filter = null;
-            if (count($item->value) == 5) {
-                $filter = $this->evaluate($item->value[3]);
+        $whereClause = [];
+        $i = 4;
+        while ($i < count($item->value) - 1) {
+            $key = $this->evaluate($item->value[$i]);
+            $value = $this->evaluate($item->value[$i + 1]);
+			if ($key == 'limit by') {
+                $selectParams['limit'] = $value + 0;
+			} else {
+				if ($key == 'use filter') {
+					 $filter = $value;
+		            if ($filter) {
+		                if (!is_string($filter)) throw new Error("Formula record\\findOne: Bad filter.");
+		                $selectManager->applyFilter($filter, $selectParams);
+		            }
+				} else {
+                	$whereClause[] = [$key => $value];
+				}
             }
-            if ($filter) {
-                if (!is_string($filter)) throw new Error("Formula record\\findOne: Bad filter.");
-                $selectManager->applyFilter($filter, $selectParams);
-            }
-        } else {
-            $whereClause = [];
-            $i = 4;
-            while ($i < count($item->value) - 1) {
-                $key = $this->evaluate($item->value[$i]);
-                $value = $this->evaluate($item->value[$i + 1]);
-                if ($key == 'limit by') {
-                    $selectParams['limit'] = $value + 0;
-                } else {
-                    $whereClause[] = [$key => $value];
-                }
-                $i = $i + 2;
-            }
-            $selectParams['whereClause'] = $whereClause;
+            $i = $i + 2;
         }
+        $selectParams['whereClause'] = $whereClause;
 
         if ($orderBy) {
             $selectManager->applyOrder($orderBy, $order, $selectParams);

@@ -31,7 +31,7 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\RecordGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class FetchRelatedManyType extends \Espo\Core\Formula\Functions\Base
+class FetchRelatedManyHashType extends \Espo\Core\Formula\Functions\Base
 {
     protected function init()
     {
@@ -44,8 +44,8 @@ class FetchRelatedManyType extends \Espo\Core\Formula\Functions\Base
     {
         $args = $this->fetchArguments($item);
 
-        if (count($args) < 5) {
-            throw new Error("Formula record\\fetchRelatedMany: Too few arguments.");
+        if (count($args) < 4) {
+            throw new Error("Formula record\\fetchRelatedManyHash: Too few arguments.");
         }
 
         $entityManager = $this->getInjection('entityManager');
@@ -54,36 +54,35 @@ class FetchRelatedManyType extends \Espo\Core\Formula\Functions\Base
         $id = $args[1];
         $link = $args[2];
         $items = $args[3];
-        $limit = $args[4];
 
         $orderBy = null;
         $order = null;
 
-        if (count($args) > 5) {
-            $orderBy = $args[5];
+        if (count($args) > 4) {
+            $orderBy = $args[4];
         }
-        if (count($args) > 6) {
-            $order = $args[6];
+        if (count($args) > 5) {
+            $order = $args[5];
         }
 
-        if (!$entityType) throw new Error("Formula record\\fetchRelatedMany: Empty entityType.");
-        if (!is_string($entityType)) throw new Error("Formula record\\fetchRelatedMany: entityType should be string.");
+        if (!$entityType) throw new Error("Formula record\\fetchRelatedManyHash: Empty entityType.");
+        if (!is_string($entityType)) throw new Error("Formula record\\fetchRelatedManyHash: entityType should be string.");
 
         if (!$id) {
-            $GLOBALS['log']->warning("Formula record\\fetchRelatedMany: Empty id.");
+            $GLOBALS['log']->warning("Formula record\\fetchRelatedManyHash: Empty id.");
             return [];
         }
-        if (!is_string($id)) throw new Error("Formula record\\fetchRelatedMany: id should be string.");
+        if (!is_string($id)) throw new Error("Formula record\\fetchRelatedManyHash: id should be string.");
 
-        if (!$link) throw new Error("Formula record\\fetchRelatedMany: Empty link.");
-        if (!is_string($link)) throw new Error("Formula record\\fetchRelatedMany: link should be string.");
+        if (!$link) throw new Error("Formula record\\fetchRelatedManyHash: Empty link.");
+        if (!is_string($link)) throw new Error("Formula record\\fetchRelatedManyHash: link should be string.");
 
-        if (!is_int($limit)) throw new Error("Formula record\\fetchRelatedMany: limit should be int.");
+        #if (!is_int($limit)) throw new Error("Formula record\\fetchRelatedMany: limit should be int.");
 
         $entity = $entityManager->getEntity($entityType, $id);
 
         if (!$entity) {
-            $GLOBALS['log']->notice("Formula record\\fetchRelatedMany: Entity {$entity} {$id} not found.");
+            $GLOBALS['log']->notice("Formula record\\fetchRelatedManyHash: Entity {$entity} {$id} not found.");
             return [];
         }
 
@@ -105,10 +104,10 @@ class FetchRelatedManyType extends \Espo\Core\Formula\Functions\Base
         }
 
         $foreignEntityType = $entity->getRelationParam($link, 'entity');
-        if (!$foreignEntityType) throw new Error("Formula record\\fetchRelatedMany: Bad or not supported link '{$link}'.");
+        if (!$foreignEntityType) throw new Error("Formula record\\fetchRelatedManyHash: Bad or not supported link '{$link}'.");
 
         $foreignLink = $entity->getRelationParam($link, 'foreign');
-        if (!$foreignLink) throw new Error("Formula record\\fetchRelatedMany: Not supported link '{$link}'.");
+        if (!$foreignLink) throw new Error("Formula record\\fetchRelatedManyHash: Not supported link '{$link}'.");
 
         $selectManager = $this->getInjection('selectManagerFactory')->create($foreignEntityType);
         $selectParams = $selectManager->getEmptySelectParams();
@@ -121,37 +120,35 @@ class FetchRelatedManyType extends \Espo\Core\Formula\Functions\Base
             $selectParams['whereClause'][] = [$foreignLink . '.id' => $entity->id];
         }
 
-        if (count($args) <= 8) {
-            $filter = null;
-            if (count($args) == 8) {
-                $filter = $args[7];
+        $i = 6;
+        while ($i < count($args) - 1) {
+            $key = $args[$i];
+            $value = $args[$i + 1];
+
+            if ($key == 'limit by') {
+                $selectParams['limit'] = $value + 0;
+            } else {
+            	if ($key == 'use filter') {
+            		$filter = $value;
+		            if ($filter) {
+		                if (!is_string($filter)) throw new Error("Formula record\\fetchRelatedManyHash: Bad filter.");
+		                $selectManager->applyFilter($filter, $selectParams);
+		            }                		
+            	} else {
+                	$selectParams['whereClause'][] = [$key => $value];
+            	}
             }
-            if ($filter) {
-                if (!is_string($filter)) throw new Error("Formula record\\fetchRelatedMany: Bad filter.");
-                $selectManager->applyFilter($filter, $selectParams);
-            }
-        } else {
-            $i = 7;
-            while ($i < count($args) - 1) {
-                $key = $args[$i];
-                $value = $args[$i + 1];
-                if ($key == 'limit by') {
-                    $selectParams['limit'] = $value + 0;
-                } else {
-                    $selectParams['whereClause'][] = [$key => $value];
-                }
-                $i = $i + 2;
-            }
+
+            $i = $i + 2;
         }
 
-        $selectParams['limit'] = $limit;
 
         if ($orderBy) {
             $selectManager->applyOrder($orderBy, $order, $selectParams);
         }
 
 
- 	$items = array_map("trim", explode(',', $items));
+ 		$items = array_map("trim", explode(',', $items));
         $e = $this->getInjection('entityManager')->getRepository($foreignEntityType)->select($items)->find($selectParams);
 
         $result = array();

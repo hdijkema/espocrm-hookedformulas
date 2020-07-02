@@ -58,8 +58,8 @@ class FillinType extends \Espo\Core\Formula\Functions\Base
 
         $entity = array_shift($args);
         $entity_id = array_shift($args);
-	$document_id = array_shift($args);
-	$filename = array_shift($args);
+	    $document_id = array_shift($args);
+	    $filename = array_shift($args);
 
         $fields = [];
         while(count($args) > 0) {
@@ -96,7 +96,7 @@ class FillinType extends \Espo\Core\Formula\Functions\Base
             return null;
         }
 
-	$pdf_in_filename = $em->getRepository('Attachment')->getFilePath($attachment);
+	    $pdf_in_filename = $em->getRepository('Attachment')->getFilePath($attachment);
         $tmpdir = sys_get_temp_dir();
         $pdf_out_filename = "$tmpdir/$filename";
 
