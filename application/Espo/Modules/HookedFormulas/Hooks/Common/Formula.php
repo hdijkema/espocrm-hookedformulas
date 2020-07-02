@@ -45,7 +45,7 @@ class Formula extends \Espo\Hooks\Common\Formula
         if (!empty($options['skipFormula'])) return;
 
         $hook = $options['hook'];
-        if ($options['vars']) {
+        if (array_key_exists('vars', $options)) {
            $variables = $options['vars'];
         } else {
            $variables = (object)[];
