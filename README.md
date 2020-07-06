@@ -14,8 +14,8 @@ Instead of only having formulas at the `'beforeSave'` hook, this module will mak
 The following hooks are supported:
 
 * afterSave 
-* afterRelate - called with variables 
-* afterUnrelate
+* afterRelate 
+* afterUnrelate 
 * afterRemove
 * afterMassRelate
 
