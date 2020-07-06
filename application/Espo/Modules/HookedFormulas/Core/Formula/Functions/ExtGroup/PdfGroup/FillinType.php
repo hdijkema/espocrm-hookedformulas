@@ -102,10 +102,15 @@ class FillinType extends \Espo\Core\Formula\Functions\Base
 
         $GLOBALS['log']->warning("Formula ext\\pdf\\fillin: pdf file in: {$pdf_in_filename}");
 
+        $pdf_errors = [];
         $pdf = new Pdf($pdf_in_filename);
+        array_push($pdf_errors, 'ext\\pdf\\fillin: new Pdf: ' . $pdf->getError());
         $pdf->fillForm($fields);
+        array_push($pdf_errors, 'ext\\pdf\\fillin: fillForm: ' . $pdf->getError());
         $pdf->needAppearances();
+        array_push($pdf_errors, 'ext\\pdf\\fillin: needAppearances: ' . $pdf->getError());
         $pdf->saveAs($pdf_out_filename);
+        array_push($pdf_errors, 'ext\\pdf\\fillin: saveAs: ' . $pdf->getError());
 
         if (file_exists($pdf_out_filename)) {
             $contents = file_get_contents($pdf_out_filename);
@@ -123,6 +128,9 @@ class FillinType extends \Espo\Core\Formula\Functions\Base
             return $attachment->id;
        } else {
             $GLOBALS['log']->warning("Formula ext\\pdf\\fillin: output filename {$pdf_out_filename} not found.");
+            foreach($pdf_errors as $err) {
+                $GLOBALS['log']->warning($err);
+            }
             return null;
        }
     }

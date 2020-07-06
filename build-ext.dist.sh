@@ -2,15 +2,17 @@
 # vi: set sw=4 ts=4:
 
 INSTALL_PREFIX=~/crm
+INSTALL_FILES="$INSTALL_PREFIX/data/installed"
 
 function usage()
 {
     echo ""
-    echo "usage: $0 <buildext|cleanup|install> <version> <extension-filename>  <extension-name> <description> <module-dir>"
+    echo "usage: $0 <buildext|cleanup|install|uninstall> <version> <extension-filename>  <extension-name> <description> <module-dir>"
     echo ""
     echo "  buildext - builds the EspoCRM extension in the 'build' directory."
     echo "  cleanup - removes the 'build' directory."
-    echo "  install - installs the files of this extension into the EspoCRM tree at '~/crm'"
+    echo "  install - installs the files of this extension into the EspoCRM tree at '$INSTALL_PREFIX'"
+    echo "  uninstall - uninstalls the files of this extension from '$INSTALL_PREFIX', if , '$INSTALL_FILES/<module-dir' exists"
     echo ""
     exit 1;
 }
@@ -40,7 +42,31 @@ done
 
 
 if [ "$CMD" == "install" ]; then
-	tar cf - $TARDIRS | (cd $INSTALL_PREFIX; tar xvf - )
+    mkdir -p $INSTALL_FILES
+	tar cf - $TARDIRS | (cd $INSTALL_PREFIX; tar xvf - ) >$INSTALL_FILES/$MODULE
+    FILES=`cat $INSTALL_FILES/$MODULE`
+    for F in $FILES
+    do
+       F="$INSTALL_PREFIX/$F"
+       if [ -f "$F" ]; then
+          echo "installed $F"
+       fi
+    done
+    echo "$MODULE installed, installed files in $INSTALL_FILES/$MODULE"
+elif [ "$CMD" == "uninstall" ] ; then
+    if [ -r $INSTALL_FILES/$MODULE ]; then
+       FILES=`cat $INSTALL_FILES/$MODULE`
+       for F in $FILES
+       do
+          F="$INSTALL_PREFIX/$F"
+          if [ -f "$F" ]; then
+            echo "removing $F"
+            rm $F;
+          fi
+       done
+    else 
+       echo "Cannot uninstall, $INSTALL_FILES/$MODULE does not exist"
+    fi
 elif [ "$CMD" == "cleanup" ]; then
     rm -rf $BUILD_DIR
 elif [ "$CMD" == "buildext" ]; then

@@ -31,64 +31,14 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\RecordGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class FetchManyType extends \Espo\Core\Formula\Functions\Base
+class FetchManyType extends FetchRecords
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('selectManagerFactory');
-    }
-
     public function process(\StdClass $item)
     {
-        if (!property_exists($item, 'value')) {
-            throw new Error();
-        }
+        $obj = $this->fetchRecs($item);
 
-        if (!is_array($item->value)) {
-            throw new Error();
-        }
-
-        if (count($item->value) < 4) {
-            throw new Error();
-        }
-
-        $entityType = $this->evaluate($item->value[0]);
-        $items = $this->evaluate($item->value[1]);
-        $orderBy = $this->evaluate($item->value[2]);
-        $order = $this->evaluate($item->value[3]) ?? 'asc';
-
-        $selectManager = $this->getInjection('selectManagerFactory')->create($entityType);
-        $selectParams = $selectManager->getEmptySelectParams();
-
-        $whereClause = [];
-        $i = 4;
-        while ($i < count($item->value) - 1) {
-            $key = $this->evaluate($item->value[$i]);
-            $value = $this->evaluate($item->value[$i + 1]);
-			if ($key == 'limit by') {
-                $selectParams['limit'] = $value + 0;
-			} else {
-				if ($key == 'use filter') {
-					 $filter = $value;
-		            if ($filter) {
-		                if (!is_string($filter)) throw new Error("Formula record\\findOne: Bad filter.");
-		                $selectManager->applyFilter($filter, $selectParams);
-		            }
-				} else {
-                	$whereClause[] = [$key => $value];
-				}
-            }
-            $i = $i + 2;
-        }
-        $selectParams['whereClause'] = $whereClause;
-
-        if ($orderBy) {
-            $selectManager->applyOrder($orderBy, $order, $selectParams);
-        }
-
-        $items = array_map("trim", explode(',', $items));
-        $e = $this->getInjection('entityManager')->getRepository($entityType)->select($items)->find($selectParams);
+        $e = $obj->elements;
+        $items = $obj->items;
 
         $result = array();
         foreach($e as $elem) {

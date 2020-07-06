@@ -10,7 +10,7 @@ else
 fi
 
 CMD=$1;
-VERSION="0.2.4"
+VERSION=`cat VERSION`
 EXT="hookedformulas-extension"
 NAME="Hooked Formulas - more power to your formulas"
 DESCRIPTION="Implements formulas for all hooks, including afterRelate, etc. and a bunch of new functions."
