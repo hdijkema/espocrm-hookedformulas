@@ -159,7 +159,7 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
            if ($actual_fields) {
               foreach($actual_fields as $field) {
                  $field = $field . ucfirst($item);
-                 if ($metadata->get(['entityDefs', $foreignEntityType, 'fields', $item)) {
+                 if ($metadata->get(['entityDefs', $foreignEntityType, 'fields', $item])) {
                      if (!in_array($field, $items) && !in_array($field, $extend_items)) {
                         array_push($extend_items, $field);
                      }
