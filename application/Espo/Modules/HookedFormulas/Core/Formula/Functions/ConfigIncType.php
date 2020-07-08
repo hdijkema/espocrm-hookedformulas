@@ -31,7 +31,7 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions;
 
 use \Espo\Core\Exceptions\Error;
 
-class ConfigIncType extends \Espo\Core\Formula\Functions\Base
+class ConfigIncType extends Config
 {
     protected function init()
     {
