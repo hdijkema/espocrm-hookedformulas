@@ -31,43 +31,51 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\ExtGroup;
 
 use Espo\Core\Exceptions\Error;
 
-#
-# arg1 - template
-# arg2 - entityType
-# arg3 - entity Id
-#
-
-class HtmlizeType extends \Espo\Core\Formula\Functions\Base
+class CopyFileType extends \Espo\Core\Formula\Functions\Base
 {
     protected function init()
     {
         $this->addDependency('entityManager');
-        $this->addDependency('serviceFactory');
-        $this->addDependency('htmlizerFactory');
     }
 
     public function process(\StdClass $item)
     {
+
         $args = $this->fetchArguments($item);
 
-        if (count($args) != 3) throw new Error("Formula ext\\htmlize: wrong arguments.");
+        if (count($args) != 2) throw new Error("Formula ext\copyFile: wrong arguments, need <fileId> <Entity to relate the new copy to>.");
 
-        $template = array_shift($args);
-        $entity_type = array_shift($args);
-        $entity_id = array_shift($args);
+        $fileId = array_shift($args);
+        $entity = array_shift($args);
+        $entity_id = $entity->get('id');
+        $entity_type = $entity->getEntityType();
 
         $em = $this->getInjection('entityManager');
 
-        $entity = $em->getEntity($entity_type, $entity_id);
+        $attachment_from = $em->getEntity('Attachment', $fileId);
+        if (!$attachment_from) {
+            $GLOBALS['log']->warning("Formula ext\\copyFile: file id not found.");
+            return null;
+        }
 
-        $htmlizer = $this->createHtmlizer();
+ 	$sys = new \Espo\Core\Utils\System();
+        $root_dir = $sys->getRootDir();
+        $upload_dir = $root_dir . '/data/upload';
+        $file=$upload_dir . '/' . $fileId;
+        $size = filesize($file);
+        $GLOBALS['log']->warning('file: '.$fileId.', path:'.$file.', size:'.$size);
 
-        return $htmlizer->render($entity, $template);
+        $contents = file_get_contents($file);
+
+        $attachment = $em->createEntity('Attachment', [
+                'name' => $attachment_from->get('name'),
+                'type' => $attachment_from->get('type'),
+                'contents' => $contents, 
+                'relatedId' => $entity_id,
+                'relatedType' => $entity_type,
+                'role' => 'Attachment',
+            ]);
+
+        return $attachment->id;
     }
-
-    protected function createHtmlizer()
-    {
-        return $this->getInjection('htmlizerFactory')->create();
-    }
-
 }

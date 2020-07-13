@@ -38,7 +38,7 @@ class IssetType extends Globals
         $args = $this->fetchRawArguments($item);
 
         if (count($args) < 1) {
-            throw new Error("Function \'global\\isSet\' should receive 1 argument.");
+            throw new Error("Function \'global\\isset\' should receive 1 argument.");
         }
 
 	    $var = $this->evaluate($args[0]);

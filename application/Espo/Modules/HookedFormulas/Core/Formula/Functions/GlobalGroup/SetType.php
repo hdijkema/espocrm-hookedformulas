@@ -38,7 +38,7 @@ class SetType extends Globals
         $args = $this->fetchRawArguments($item);
 
         if (count($args) < 2) {
-            throw new Error("Function \'global\\set\' should receieve 2 arguments.");
+            throw new Error("Function \'global\\set\' should receive 2 arguments.");
         }
 
 	$var = $this->evaluate($args[0]);

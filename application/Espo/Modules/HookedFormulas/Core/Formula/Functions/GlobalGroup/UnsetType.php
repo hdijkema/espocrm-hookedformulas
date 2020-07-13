@@ -38,7 +38,7 @@ class UnsetType extends Globals
         $args = $this->fetchRawArguments($item);
 
         if (count($args) < 1) {
-            throw new Error("Function \'global\\get\' should receive 1 argument.");
+            throw new Error("Function \'global\\unset\' should receive 1 argument.");
         }
 
 	$var = $this->evaluate($args[0]);

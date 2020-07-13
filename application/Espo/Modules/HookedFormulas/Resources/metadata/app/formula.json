@@ -70,6 +70,10 @@
 	"ext\\Htmlize": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\HtmlizeType",
 	"Ext\\htmlize": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\HtmlizeType",
 	"ext\\htmlize": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\HtmlizeType",
+        "Ext\\CopyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
+        "ext\\CopyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
+        "Ext\\copyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
+        "ext\\copyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
 	
 	"Ext\\Pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
 	"Ext\\Pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
