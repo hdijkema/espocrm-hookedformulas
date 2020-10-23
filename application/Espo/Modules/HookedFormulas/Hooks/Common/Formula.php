@@ -1,11 +1,31 @@
 <?php
-
 namespace Espo\Modules\HookedFormulas\Hooks\Common;
 
 use \Espo\ORM\Entity;
 
 class Formula extends \Espo\Hooks\Common\Formula
 {
+
+    protected function get_metadata()
+    {
+        if (isset($this->metadata)) {
+           # EspoCRM >= 6.0.0
+           return $this->metadata;
+        } else { 
+           # EspoCRM < 6.0.0
+           return $this->getMetadata();
+        }
+    }
+
+    protected function get_formula_manager() {
+        if (isset($this->formulaManager)) {
+           # EspoCRM >= 6.0.0
+           return $this->formulaManager;
+        } else {
+           # EspoCRM < 6.0.0
+           return $this->getFormulaManager();
+        }
+    }
 
     protected function getScript($script, $hook)
     {
@@ -27,7 +47,7 @@ class Formula extends \Espo\Hooks\Common\Formula
               $len = $idx_end - $idx;
               $part = substr($script, $idx, $len);
               $script = substr($script, 0, $idx_begin) . substr($script, $idx_end + strlen($end_needle));
-              if ($h == $hook) { return $part; }
+              if ($h == $hook) { return trim($part); }
            }
         }
 
@@ -35,7 +55,7 @@ class Formula extends \Espo\Hooks\Common\Formula
            // return what's left of $script
            // remove possible beforeSave / afterSave tags.
            $script = preg_replace('/(begin|end)[:]beforeSave/', '', $script);
-           return $script;
+           return trim($script);
         }
     }
 
@@ -52,22 +72,22 @@ class Formula extends \Espo\Hooks\Common\Formula
         }
 
         if ($hook == 'beforeSave') {
-            $scriptList = $this->getMetadata()->get(['formula', $entity->getEntityType(), 'beforeSaveScriptList'], []);
+            $scriptList = $this->get_metadata()->get(['formula', $entity->getEntityType(), 'beforeSaveScriptList'], []);
             foreach ($scriptList as $script) {
                 try {
-                    $this->getFormulaManager()->run($script, $entity, $variables);
+                    $this->get_formula_manager()->run($script, $entity, $variables);
                 } catch (\Exception $e) {
                     $GLOBALS['log']->error('Formula failed: ' . $e->getMessage());
                 }
             }
         }
 
-        $customScript = $this->getMetadata()->get(['formula', $entity->getEntityType(), 'beforeSaveCustomScript']);
+        $customScript = $this->get_metadata()->get(['formula', $entity->getEntityType(), 'beforeSaveCustomScript']);
         if ($customScript) {
             $customScript = $this->getScript($customScript, $hook);
             if ($customScript) {
                try {
-                   $this->getFormulaManager()->run($customScript, $entity, $variables);
+                   $this->get_formula_manager()->run($customScript, $entity, $variables);
                } catch (\Exception $e) {
                    $GLOBALS['log']->error('Formula failed: ' . $e->getMessage());
                }
