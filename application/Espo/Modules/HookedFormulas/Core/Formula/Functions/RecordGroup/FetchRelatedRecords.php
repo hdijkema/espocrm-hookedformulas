@@ -175,4 +175,98 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
 
         return (object) $obj;
     }
+
+    protected function countRecs(\StdClass $item)
+    {
+        $args = $this->fetchArguments($item);
+
+        if (count($args) < 3) {
+            throw new Error("Formula countRecs: Too few arguments.");
+        }
+
+        $entityManager = $this->getInjection('entityManager');
+
+        $entityType = $args[0];
+        $id = $args[1];
+        $link = $args[2];
+
+        $orderBy = null;
+        $order = null;
+
+        if (!$entityType) throw new Error("Formula countRecs: Empty entityType.");
+        if (!is_string($entityType)) throw new Error("Formula countRecs: entityType should be string.");
+
+        if (!$id) {
+            $GLOBALS['log']->warning("Formula countRecs: Empty id.");
+            return [];
+        }
+        if (!is_string($id)) throw new Error("Formula countRecs: id should be string.");
+
+        if (!$link) throw new Error("Formula countRecs: Empty link.");
+        if (!is_string($link)) throw new Error("Formula countRecs: link should be string.");
+
+        $entity = $entityManager->getEntity($entityType, $id);
+
+        if (!$entity) {
+            $GLOBALS['log']->notice("Formula countRecs: Entity {$entityType} {$id} not found.");
+            return [];
+        }
+
+        $metadata = $this->getInjection('metadata');
+
+        $relationType = $entity->getRelationParam($link, 'type');
+
+        if (in_array($relationType, ['belongsTo', 'hasOne', 'belongsToParent'])) {
+            throw new Error("Formula countRecs: Not supported link type '{$relationType}'.");
+        }
+
+        $foreignEntityType = $entity->getRelationParam($link, 'entity');
+        if (!$foreignEntityType) throw new Error("Formula countRecs: Bad or not supported link '{$link}'.");
+
+        $foreignLink = $entity->getRelationParam($link, 'foreign');
+        if (!$foreignLink) throw new Error("Formula countRecs: Not supported link '{$link}'.");
+
+        $selectManager = $this->getInjection('selectManagerFactory')->create($foreignEntityType);
+        $selectParams = $selectManager->getEmptySelectParams();
+
+        if ($relationType === 'hasChildren') {
+            $selectParams['whereClause'][] = [$foreignLink . 'Id' => $entity->id];
+            $selectParams['whereClause'][] = [$foreignLink . 'Type' => $entity->getEntityType()];
+        } else {
+            $selectManager->addJoin($foreignLink, $selectParams);
+            $selectParams['whereClause'][] = [$foreignLink . '.id' => $entity->id];
+        }
+
+        $i = 3;
+        while ($i < count($args) - 1) {
+            $key = $args[$i];
+            $value = $args[$i + 1];
+
+            if ($key == 'limit by') {
+                $selectParams['limit'] = $value + 0;
+            } else {
+            	if ($key == 'use filter') {
+            		$filter = $value;
+		            if ($filter) {
+		                if (!is_string($filter)) throw new Error("Formula record\\fetchRelatedMany: Bad filter.");
+		                $selectManager->applyFilter($filter, $selectParams);
+		            }                		
+            	} else {
+                	$selectParams['whereClause'][] = [$key => $value];
+            	}
+            }
+
+            $i = $i + 2;
+        }
+
+ 	$items = array_map("trim", explode(',', $items));
+        $metadata = $this->getInjection('metadata');
+
+	$items = ['id'];
+        #$e = $this->getInjection('entityManager')->getRepository($foreignEntityType)->select($items)->find($selectParams);
+        #return count($e);
+        $e = $this->getInjection('entityManager')->getRepository($foreignEntityType)->count($selectParams);
+        return $e;
+    }
+
 }
