@@ -43,7 +43,7 @@ class ToIntType extends \Espo\Core\Formula\Functions\AttributeType
             throw new Error();
         }
 
-        if (count($item->value) == 1 ) {
+        if (count($item->value) != 1 ) {
             throw new Error();
         }
 
