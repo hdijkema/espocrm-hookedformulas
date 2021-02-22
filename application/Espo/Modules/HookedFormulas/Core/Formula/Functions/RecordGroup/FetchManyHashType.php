@@ -41,10 +41,10 @@ class FetchManyHashType extends FetchRecords
         $items = $obj->items;
 
         $result = array();
-        $first = true;
+        #$first = true;
         foreach($e as $elem) {
             $row = array();
-            if ($first) { file_put_contents('/data/www/crm/tmp/elem.json', json_encode($elem));$first=false; }
+            #if ($first) { file_put_contents('/data/www/crm/tmp/elem.json', json_encode($elem));$first=false; }
             foreach($items as $name) {
 		$val = $elem->get($name);
 		$row[$name] = $val;
