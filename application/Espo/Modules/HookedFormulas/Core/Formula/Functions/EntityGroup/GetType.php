@@ -134,6 +134,7 @@ class GetType extends \Espo\Core\Formula\Functions\Base
         $this->loadLinkFields($entity);
         $this->loadLinkMultipleFields($entity);
 
+
         return $entity;
     }
 }
