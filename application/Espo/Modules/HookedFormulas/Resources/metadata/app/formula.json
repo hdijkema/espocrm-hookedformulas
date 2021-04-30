@@ -37,6 +37,9 @@
 	"SetAttr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\SetAttrType",
 	"setAttr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\SetAttrType",
 
+	"Diff": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\DiffType",
+	"diff": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\DiffType",
+
 	"LogAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
 	"logAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
 	"Logadd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
