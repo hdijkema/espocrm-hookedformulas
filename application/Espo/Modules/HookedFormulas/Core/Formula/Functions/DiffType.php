@@ -92,7 +92,7 @@ class DiffType extends \Espo\Core\Formula\Functions\Base
         foreach($e_rels as $name => $d) { array_push($fields, $name); }
 
 	foreach($fields as $field) {
-           $GLOBALS['log']->warning("Field: $field");
+           #$GLOBALS['log']->warning("Field: $field");
            if ($field != 'modifiedAt' && $field != 'teamsIds' && $field != 'teamsNames') {
               if (!$this->has($entity_old, $field)) {
                  if ($this->has($entity_new, $field)) {
