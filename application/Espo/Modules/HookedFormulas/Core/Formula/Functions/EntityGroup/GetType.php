@@ -129,10 +129,12 @@ class GetType extends \Espo\Core\Formula\Functions\Base
 
 
         $entity = $this->getEntityManager()->getEntity($entityType, $id);
-        $this->loadPhoneNumberField($entity);
-        $this->loadEmailAddressField($entity);
-        $this->loadLinkFields($entity);
-        $this->loadLinkMultipleFields($entity);
+        if ($entity != null) {
+           $this->loadPhoneNumberField($entity);
+           $this->loadEmailAddressField($entity);
+           $this->loadLinkFields($entity);
+           $this->loadLinkMultipleFields($entity);
+        }
 
 
         return $entity;
