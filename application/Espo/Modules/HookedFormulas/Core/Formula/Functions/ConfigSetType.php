@@ -31,7 +31,7 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions;
 
 use \Espo\Core\Exceptions\Error;
 
-class ConfigIncType extends \Espo\Core\Formula\Functions\Base
+class ConfigSetType extends \Espo\Core\Formula\Functions\Base
 {
     protected function init()
     {
@@ -50,7 +50,7 @@ class ConfigIncType extends \Espo\Core\Formula\Functions\Base
         }
 
         if (count($item->value) < 2) {
-            throw new Error('\'configSet\' needs a configuration item and a setting.'); 
+            throw new Error('\'configSet\' needs a configuration item and a setting.');
         }
 
         $cfg_key = $this->evaluate($item->value[0]);
@@ -69,7 +69,7 @@ class ConfigIncType extends \Espo\Core\Formula\Functions\Base
         $entityRepos = $this->getInjection('entityManager')->getRepository($entityType);
 
         $e = $entityRepos->select(['id', 'type'])->findOne($selectParams);
-        if ($e) { 
+        if ($e) {
             $type = $e->get('type');
             $cfg_entity = $entityRepos->get($e->id);
 
