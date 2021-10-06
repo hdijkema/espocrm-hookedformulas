@@ -42,9 +42,9 @@ done
 
 
 if [ "$CMD" == "install" ]; then
-    mkdir -p $INSTALL_FILES
-	tar cf - $TARDIRS | (cd $INSTALL_PREFIX; tar xvf - ) >$INSTALL_FILES/$MODULE
-    FILES=`cat $INSTALL_FILES/$MODULE`
+    mkdir -p "$INSTALL_FILES"
+	tar cf - $TARDIRS | (cd $INSTALL_PREFIX; tar xvf - ) >"$INSTALL_FILES/$MODULE"
+    FILES=`cat "$INSTALL_FILES/$MODULE"`
     for F in $FILES
     do
        F="$INSTALL_PREFIX/$F"
@@ -54,8 +54,8 @@ if [ "$CMD" == "install" ]; then
     done
     echo "$MODULE installed, installed files in $INSTALL_FILES/$MODULE"
 elif [ "$CMD" == "uninstall" ] ; then
-    if [ -r $INSTALL_FILES/$MODULE ]; then
-       FILES=`cat $INSTALL_FILES/$MODULE`
+    if [ -r "$INSTALL_FILES/$MODULE" ]; then
+       FILES=`cat "$INSTALL_FILES/$MODULE"`
        for F in $FILES
        do
           F="$INSTALL_PREFIX/$F"
@@ -64,19 +64,19 @@ elif [ "$CMD" == "uninstall" ] ; then
             rm $F;
           fi
        done
-    else 
+    else
        echo "Cannot uninstall, $INSTALL_FILES/$MODULE does not exist"
     fi
 elif [ "$CMD" == "cleanup" ]; then
-    rm -rf $BUILD_DIR
+    rm -rf "$BUILD_DIR"
 elif [ "$CMD" == "buildext" ]; then
-	DIR=/tmp/$EXT
-	rm -rf $DIR
-	mkdir $DIR
+	DIR="/tmp/$EXT"
+	rm -rf "$DIR"
+	mkdir "$DIR"
 
-	MANIFEST=$DIR/manifest.json
+	MANIFEST="$DIR/manifest.json"
 	DT=`date +%Y-%m-%d`
-	
+
 	echo "{" 											>$MANIFEST
 	echo "  \"name\": \"$NAME\", " 						>>$MANIFEST
 	echo "  \"version\": \"$VERSION\", " 				>>$MANIFEST
@@ -87,15 +87,15 @@ elif [ "$CMD" == "buildext" ]; then
 	echo "  \"description\": \"$DESCRIPTION\""			>>$MANIFEST
 	echo "}"											>>$MANIFEST
 
-	mkdir $DIR/files
+	mkdir "$DIR/files"
     if [ -d scripts ]; then
         TARDIRS="$TARDIRS scripts"
     fi
-	tar cf - $TARDIRS | (cd $DIR/files; tar xf - )
+	tar cf - $TARDIRS | (cd "$DIR/files"; tar xf - )
 
-	mkdir $DIR/scripts
+	mkdir "$DIR/scripts"
 
-	F=$DIR/scripts/BeforeInstall.php
+	F="$DIR/scripts/BeforeInstall.php"
 	echo "<?php"									>$F
     echo "class BeforeInstall"						>>$F
 	echo "{"										>>$F
@@ -104,7 +104,7 @@ elif [ "$CMD" == "buildext" ]; then
 	echo "}"										>>$F
 	echo "?>"										>>$F
 
-	F=$DIR/scripts/AfterInstall.php
+	F="$DIR/scripts/AfterInstall.php"
 	echo "<?php"									>$F
     echo "class AfterInstall"						>>$F
 	echo "{"										>>$F
@@ -112,7 +112,7 @@ elif [ "$CMD" == "buildext" ]; then
 	echo "}"										>>$F
 	echo "?>"										>>$F
 
-	F=$DIR/scripts/BeforeUninstall.php
+	F="$DIR/scripts/BeforeUninstall.php"
 	echo "<?php"									>$F
     echo "class BeforeUninstall"					>>$F
 	echo "{"										>>$F
@@ -120,7 +120,7 @@ elif [ "$CMD" == "buildext" ]; then
 	echo "}"										>>$F
 	echo "?>"										>>$F
 
-	F=$DIR/scripts/AfterUninstall.php
+	F="$DIR/scripts/AfterUninstall.php"
 	echo "<?php"									>$F
     echo "class AfterUninstall"						>>$F
 	echo "{"										>>$F
@@ -128,22 +128,22 @@ elif [ "$CMD" == "buildext" ]; then
 	echo "}"										>>$F
 	echo "?>"										>>$F
 
-    if [ -d $DIR/files/scripts ]; then
-        (cd $DIR/files; tar cf - scripts) | (cd $DIR; tar xvf - )
-        rm -rf $DIR/files/scripts
+    if [ -d "$DIR/files/scripts" ]; then
+        (cd "$DIR/files"; tar cf - scripts) | (cd "$DIR"; tar xvf - )
+        rm -rf "$DIR/files/scripts"
     fi
 
 	EXTENSION="espocrm-$EXT-$VERSION.zip"
 	EXT_FILE="$BUILD_DIR/$EXTENSION"
 
-	mkdir -p $BUILD_DIR
+	mkdir -p "$BUILD_DIR"
 
     echo "creating extension in $EXT_FILE"
-    rm -f $EXT_FILE
-	(cd $DIR;zip -r $EXT_FILE .)
+    rm -f "$EXT_FILE"
+	(cd "$DIR";zip -r "$EXT_FILE" .)
 
 	echo "$EXTENSION created in directory $BUILD_DIR"
-else 
+else
     echo ""
     echo "Command '$CMD' given, but it is not a supported command"
     usage

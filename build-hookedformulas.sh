@@ -6,7 +6,7 @@ if [ -e build-ext.sh ]; then
     cp build-ext.sh build-ext.dist.sh
     chmod 755 build-ext.dist.sh
 else
-    BE='./build-ext-dist.sh'
+    BE='./build-ext.dist.sh'
 fi
 
 CMD=$1;
