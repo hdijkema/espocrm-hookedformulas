@@ -8,247 +8,247 @@
 		},
 		{
 			"name": "table\\new",
-			"insertText": "table\\new(...)",
+			"insertText": "table\\new(COLUMNS)",
 			"returnType": "string"
 		},
 		{
 			"name": "table\\add",
-			"insertText": "table\\add(...)",
+			"insertText": "table\\add(TABLE, COLUMNS)",
 			"returnType": "string"
 		},
 		{
 			"name": "table\\filename",
-			"insertText": "table\\filename(...)",
+			"insertText": "table\\filename(TABLE, FILENAME)",
 			"returnType": "string"
 		},
 		{
 			"name": "table\\style",
-			"insertText": "table\\style(...)",
+			"insertText": "table\\style(TABLE, STYLE)",
 			"returnType": "string"
 		},
 		{
 			"name": "table\\link",
-			"insertText": "table\\link(...)",
+			"insertText": "table\\link(HREF, VALUE, [TARGET])",
 			"returnType": "string"
 		},
 		{
 			"name": "table\\toHtml",
-			"insertText": "table\\toHtml(...)",
+			"insertText": "table\\toHtml(TABLE)",
 			"returnType": "string"
 		},
 		{
 			"name": "attr",
-			"insertText": "attr(...)",
+			"insertText": "attr(ENTITY, VALUE)",
 			"returnType": "string"
 		},
 		{
 			"name": "setAttr",
-			"insertText": "setAttr(...)",
+			"insertText": "setAttr(ENTITY, ATTR, VALUE)",
 			"returnType": "string"
 		},
 		{
 			"name": "diff",
-			"insertText": "diff(...)",
+			"insertText": "diff(ENTITY1, ENTITY2)",
 			"returnType": "string"
 		},
 		{
 			"name": "logadd",
-			"insertText": "logadd(...)",
+			"insertText": "logadd(VARIABLE)",
 			"returnType": "string"
 		},
 		{
 			"name": "log",
-			"insertText": "log(...)",
+			"insertText": "log(TYPE, STRING)",
 			"returnType": "string"
 		},
 		{
 			"name": "strAdd",
-			"insertText": "strAdd(...)",
+			"insertText": "strAdd(VARIABLE)",
 			"returnType": "string"
 		},
 		{
 			"name": "toInt",
-			"insertText": "toInt(...)",
+			"insertText": "toInt(STRING)",
 			"returnType": "int"
 		},
 		{
 			"name": "toDouble",
-			"insertText": "toDouble(...)",
-			"returnType": "string"
+			"insertText": "toDouble(STRING)",
+			"returnType": "float"
 		},
 		{
 			"name": "toString",
-			"insertText": "toString(...)",
+			"insertText": "toString(VARIABLE)",
 			"returnType": "string"
 		},
 		{
 			"name": "configExists",
-			"insertText": "configExists(...)",
+			"insertText": "configExists(CONFIG)",
 			"returnType": "string"
 		},
 		{
 			"name": "configGet",
-			"insertText": "configGet(...)",
+			"insertText": "configGet(CONFIG)",
 			"returnType": "string"
 		},
 		{
 			"name": "configInc",
-			"insertText": "configInc(...)",
+			"insertText": "configInc(CONFIG)",
 			"returnType": "string"
 		},
 		{
 			"name": "configSet",
-			"insertText": "configSet(...)",
+			"insertText": "configSet(CONFIG, SETTING)",
 			"returnType": "string"
 		},
 		{
 			"name": "configClearCache",
-			"insertText": "configClearCache(...)",
-			"returnType": "string"
+			"insertText": "configClearCache()",
+			"returnType": "null"
 		},
 		{
 			"name": "while",
-			"insertText": "while(...)",
+			"insertText": "while(CONDITION, STATEMENT)",
 			"returnType": "string"
 		},
 		{
 			"name": "array\\set",
-			"insertText": "array\\set(...)",
+			"insertText": "array\\set(ARRAY, INDEX, VALUE)",
 			"returnType": "string"
 		},
 		{
 			"name": "entity\\get",
-			"insertText": "entity\\get(...)",
-			"returnType": "string"
+			"insertText": "entity\\get(ENTITY_TYPE, ID)",
+			"returnType": "entity"
 		},
 		{
 			"name": "entity\\save",
-			"insertText": "entity\\save(...)",
+			"insertText": "entity\\save(ENTITY)",
 			"returnType": "string"
 		},
 		{
 			"name": "entity\\this",
-			"insertText": "entity\\this(...)",
-			"returnType": "string"
+			"insertText": "entity\\this()",
+			"returnType": "entity"
 		},
 		{
 			"name": "entity\\getMany",
-			"insertText": "entity\\getMany(...)",
+			"insertText": "entity\\getMany(ENTITY, LIMIT)",
 			"returnType": "string"
 		},
 		{
 			"name": "entity\\getRelated",
-			"insertText": "entity\\getRelated(...)",
+			"insertText": "entity\\getRelated(ENTITY, LINK, LIMIT)",
 			"returnType": "string"
 		},
 		{
 			"name": "ext\\begin",
-			"insertText": "ext\\begin(...)",
+			"insertText": "ext\\begin()",
 			"returnType": "string"
 		},
 		{
 			"name": "ext\\commit",
-			"insertText": "ext\\commit(...)",
+			"insertText": "ext\\commit()",
 			"returnType": "string"
 		},
 		{
 			"name": "ext\\htmlize",
-			"insertText": "ext\\htmlize(...)",
+			"insertText": "ext\\htmlize(TEMPLATE, ENTITY_TYPE, ID)",
 			"returnType": "string"
 		},
 		{
 			"name": "ext\\copyFile",
-			"insertText": "ext\\copyFile(...)",
+			"insertText": "ext\\copyFile(FILE_ID, ENTITY)",
 			"returnType": "string"
 		},
 		{
 			"name": "ext\\pdf\\fillin",
-			"insertText": "ext\\pdf\\fillin(...)",
+			"insertText": "ext\\pdf\\fillin(ENTITY, ENTITY_ID, DOCUMENT_ID, FILENAME)",
 			"returnType": "string"
 		},
 		{
 			"name": "global\\get",
-			"insertText": "global\\get(...)",
+			"insertText": "global\\get(KEY)",
 			"returnType": "string"
 		},
 		{
 			"name": "global\\set",
-			"insertText": "global\\set(...)",
+			"insertText": "global\\set(KEY, VALUE)",
 			"returnType": "string"
 		},
 		{
 			"name": "global\\isset",
-			"insertText": "global\\isset(...)",
-			"returnType": "string"
+			"insertText": "global\\isset(KEY)",
+			"returnType": "bool"
 		},
 		{
 			"name": "global\\unset",
-			"insertText": "global\\unset(...)",
+			"insertText": "global\\unset(KEY)",
 			"returnType": "string"
 		},
 		{
 			"name": "hash\\get",
-			"insertText": "hash\\get(...)",
+			"insertText": "hash\\get(HASH, KEY)",
 			"returnType": "string"
 		},
 		{
 			"name": "hash\\keys",
-			"insertText": "hash\\keys(...)",
+			"insertText": "hash\\keys(HASH)",
 			"returnType": "string"
 		},
 		{
 			"name": "hash\\set",
-			"insertText": "hash\\set(...)",
+			"insertText": "hash\\set(HASH, KEY, VALUE)",
 			"returnType": "string"
 		},
 		{
 			"name": "hash\\isset",
-			"insertText": "hash\\isset(...)",
+			"insertText": "hash\\isset(HASH, KEY)",
 			"returnType": "string"
 		},
 		{
 			"name": "hash\\unset",
-			"insertText": "hash\\unset(...)",
+			"insertText": "hash\\unset(HASH, KEY)",
 			"returnType": "string"
 		},
 		{
 			"name": "hash\\new",
-			"insertText": "hash\\new(...)",
+			"insertText": "hash\\new()",
 			"returnType": "string"
 		},
 		{
 			"name": "record\\fetchManyHash",
-			"insertText": "record\\fetchManyHash(...)",
+			"insertText": "record\\fetchManyHash(RECORD)",
 			"returnType": "string"
 		},
 		{
 			"name": "record\\fetchMany",
-			"insertText": "record\\fetchMany(...)",
+			"insertText": "record\\fetchMany(RECORD)",
 			"returnType": "string"
 		},
 		{
 			"name": "record\\fetchRelatedManyHash",
-			"insertText": "record\\fetchRelatedManyHash(...)",
+			"insertText": "record\\fetchRelatedManyHash(RECORD)",
 			"returnType": "string"
 		},
 		{
 			"name": "record\\fetchRelatedMany",
-			"insertText": "record\\fetchRelatedMany(...)",
+			"insertText": "record\\fetchRelatedMany(RECORD)",
 			"returnType": "string"
 		},
 		{
 			"name": "record\\countRel",
-			"insertText": "record\\countRel(...)",
+			"insertText": "record\\countRel(RECORD)",
 			"returnType": "string"
 		},
 		{
 			"name": "record\\findMany",
-			"insertText": "record\\findMany(...)",
+			"insertText": "record\\findMany(ENTITY_TYPE, ORDER_BY, ORDER)",
 			"returnType": "string"
 		},
 		{
 			"name": "record\\recalculate",
-			"insertText": "record\\recalculate(...)",
+			"insertText": "record\\recalculate(ENTITY_TYPE, CONDITION)",
 			"returnType": "string"
 		},
 		{
