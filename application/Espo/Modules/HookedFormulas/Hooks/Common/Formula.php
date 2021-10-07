@@ -8,24 +8,24 @@ use \Espo\ORM\Entity;
 
 class Formula extends \Espo\Hooks\Common\Formula
 {
-    private $formulaManager;
-    private $metadata;
+    private $_formulaManager;
+    private $_metadata;
 
     public function __construct(Metadata $metadata, FormulaManager $formulaManager, Log $log)
     {
-        $this->metadata = $metadata;
-        $this->formulaManager = $formulaManager;
+        $this->_metadata = $metadata;
+        $this->_formulaManager = $formulaManager;
 
         parent::__construct($metadata, $formulaManager, $log);
     }
 
     protected function get_metadata()
     {
-        return $this->metadata;
+        return $this->_metadata;
     }
 
     protected function get_formula_manager() {
-        return $this->formulaManager;
+        return $this->_formulaManager;
     }
 
     protected function getScript($script, $hook)

@@ -73,5 +73,11 @@ git clone https://github.com/hdijkema/espocrm-hookedformulas.git HookedFormulas
 ```
 2. Start coding.
 
+# Building the extension
 
-
+1. Increase version number specified in the `VERSION` file
+2. Run the build script
+```
+./build-hookedformulas.sh buildext
+```
+3. You'll find a new zip file in the `build` directory
