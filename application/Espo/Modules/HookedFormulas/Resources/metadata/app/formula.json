@@ -444,13 +444,13 @@
 		"Record\\recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
 		"record\\Recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
 		"record\\recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
-		"string\\tobase64": "\\Espo\\Custom\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
-		"String\\tobase64": "\\Espo\\Custom\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
-		"string\\Tobase64": "\\Espo\\Custom\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
-		"String\\Tobase64": "\\Espo\\Custom\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
-		"string\\ToBase64": "\\Espo\\Custom\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
-		"String\\ToBase64": "\\Espo\\Custom\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
-		"string\\toBase64": "\\Espo\\Custom\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
-		"String\\toBase64": "\\Espo\\Custom\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type"
+		"string\\tobase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"String\\tobase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"string\\Tobase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"String\\Tobase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"string\\ToBase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"String\\ToBase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"string\\toBase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"String\\toBase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type"
 	}
 }
