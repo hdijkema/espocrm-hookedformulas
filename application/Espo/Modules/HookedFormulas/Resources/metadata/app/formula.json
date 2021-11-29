@@ -50,6 +50,9 @@
 	"StrAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StrAddType",
 	"strAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StrAddType",
 
+        "toJsonFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToJsonFileType",
+        "ToJsonFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToJsonFileType",
+
 	"ToInt": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToIntType",
 	"toInt": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToIntType",
 	"ToDouble": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToDoubleType",
