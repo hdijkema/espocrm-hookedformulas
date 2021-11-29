@@ -27,27 +27,19 @@
  * these Appropriate Legal Notices must retain the display of the "EspoCRM" word.
  ************************************************************************/
 
-namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\HashGroup;
+namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\StringGroup;
 
-use Espo\Core\Exceptions\Error;
+use Espo\Core\Formula\{
+    Functions\BaseFunction,
+    ArgumentList,
+};
 
-class KeysType extends \Espo\Core\Formula\Functions\Base
+class Tobase64Type extends BaseFunction
 {
-    public function process(\StdClass $item)
+    public function process(ArgumentList $args)
     {
-        $args = $this->fetchRawArguments($item);
+        $hash = $this->evaluate($args[0]);
 
-        if (count($args) != 1) {
-            throw new Error("Function \'hash\\keys\' should receive 1 argument.");
-        }
-
-	$hash = $this->evaluate($args[0]);
-
-	$a = array();
-	foreach($hash as $key => $value) {
-		array_push($a, $key);
-	}
-
-	return $a;
+	    return base64_encode($hash);
     }
 }

@@ -1,30 +1,31 @@
 <?php
 namespace Espo\Modules\HookedFormulas\Hooks\Common;
 
+use Espo\Core\Formula\Manager as FormulaManager;
+use Espo\Core\Utils\Log;
+use Espo\Core\Utils\Metadata;
 use \Espo\ORM\Entity;
 
 class Formula extends \Espo\Hooks\Common\Formula
 {
+    private $_formulaManager;
+    private $_metadata;
+
+    public function __construct(Metadata $metadata, FormulaManager $formulaManager, Log $log)
+    {
+        $this->_metadata = $metadata;
+        $this->_formulaManager = $formulaManager;
+
+        parent::__construct($metadata, $formulaManager, $log);
+    }
 
     protected function get_metadata()
     {
-        if (isset($this->metadata)) {
-           # EspoCRM >= 6.0.0
-           return $this->metadata;
-        } else { 
-           # EspoCRM < 6.0.0
-           return $this->getMetadata();
-        }
+        return $this->_metadata;
     }
 
     protected function get_formula_manager() {
-        if (isset($this->formulaManager)) {
-           # EspoCRM >= 6.0.0
-           return $this->formulaManager;
-        } else {
-           # EspoCRM < 6.0.0
-           return $this->getFormulaManager();
-        }
+        return $this->_formulaManager;
     }
 
     protected function getScript($script, $hook)
