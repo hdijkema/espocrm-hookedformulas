@@ -260,6 +260,7 @@
 	"functionClassNameMap": {
 		"Exec": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExecType",
 		"exec": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExecType",
+    
 		"Table\\New": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\NewType",
 		"Table\\new": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\NewType",
 		"table\\New": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\NewType",
@@ -288,26 +289,35 @@
 		"Table\\toHtml": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\ToHtmlType",
 		"table\\ToHtml": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\ToHtmlType",
 		"table\\toHtml": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\ToHtmlType",
+    
 		"Attr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\AttrType",
 		"attr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\AttrType",
 		"SetAttr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\SetAttrType",
 		"setAttr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\SetAttrType",
+    
 		"Diff": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\DiffType",
 		"diff": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\DiffType",
+    
 		"LogAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
 		"logAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
 		"Logadd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
 		"logadd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
 		"Log": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogType",
 		"log": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogType",
+    
 		"StrAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StrAddType",
 		"strAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StrAddType",
+    
+    "toJsonFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToJsonFileType",
+    "ToJsonFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToJsonFileType",
+    
 		"ToInt": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToIntType",
 		"toInt": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToIntType",
 		"ToDouble": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToDoubleType",
 		"toDouble": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToDoubleType",
 		"ToString": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToStringType",
 		"toString": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToStringType",
+    
 		"ConfigExists": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigExistsType",
 		"configExists": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigExistsType",
 		"ConfigGet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigGetType",
@@ -318,12 +328,15 @@
 		"configSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigSetType",
 		"ConfigClearCache": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigClearCacheType",
 		"configClearCache": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigClearCacheType",
+    
 		"While": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\WhileType",
 		"while": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\WhileType",
+    
 		"Array\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
 		"array\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
 		"Array\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
 		"array\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
+    
 		"Entity\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetType",
 		"entity\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetType",
 		"Entity\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetType",
@@ -344,6 +357,7 @@
 		"entity\\GetRelated": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetRelatedType",
 		"Entity\\getRelated": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetRelatedType",
 		"entity\\getRelated": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetRelatedType",
+    
 		"Ext\\Begin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\BeginType",
 		"ext\\Begin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\BeginType",
 		"Ext\\begin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\BeginType",
@@ -360,6 +374,7 @@
 		"ext\\CopyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
 		"Ext\\copyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
 		"ext\\copyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
+    
 		"Ext\\Pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
 		"Ext\\Pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
 		"Ext\\pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
@@ -368,6 +383,7 @@
 		"ext\\Pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
 		"ext\\pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
 		"ext\\pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
+    
 		"Global\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\GetType",
 		"Global\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\GetType",
 		"global\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\GetType",
@@ -388,6 +404,7 @@
 		"global\\unSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
 		"Global\\unset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
 		"global\\unset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
+    
 		"Hash\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\GetType",
 		"Hash\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\GetType",
 		"hash\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\GetType",
@@ -416,6 +433,7 @@
 		"Hash\\new": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\NewType",
 		"hash\\New": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\NewType",
 		"hash\\new": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\NewType",
+    
 		"Record\\FetchManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyHashType",
 		"Record\\fetchManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyHashType",
 		"record\\FetchManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyHashType",
@@ -444,6 +462,7 @@
 		"Record\\recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
 		"record\\Recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
 		"record\\recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
+    
 		"string\\tobase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
 		"String\\tobase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
 		"string\\Tobase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
