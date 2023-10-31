@@ -1,37 +1,13 @@
 <?php
-/************************************************************************
- * This file is part of EspoCRM.
- *
- * EspoCRM - Open Source CRM application.
- * Copyright (C) 2014-2020 Yuri Kuznetsov, Taras Machyshyn, Oleksiy Avramenko
- * Website: https://www.espocrm.com
- *
- * EspoCRM is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * EspoCRM is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with EspoCRM. If not, see http://www.gnu.org/licenses/.
- *
- * The interactive user interfaces in modified source and object code versions
- * of this program must display Appropriate Legal Notices, as required under
- * Section 5 of the GNU General Public License version 3.
- *
- * In accordance with Section 7(b) of the GNU General Public License version 3,
- * these Appropriate Legal Notices must retain the display of the "EspoCRM" word.
- ************************************************************************/
+# vim: set tabstop=3:softtabstop=3:shiftwidth=3:noexpandtab
 
 namespace Espo\Modules\HookedFormulas\Core\Formula\Functions;
 
 use \Espo\Core\Exceptions\Error;
+use \Espo\Core\Formula\Parser\Ast\Variable;
+use \Espo\Core\Formula\Parser\Ast\Attribute;
 
-class ConfigSetType extends \Espo\Core\Formula\Functions\Base
+class ConfigSetType extends Config
 {
     protected function init()
     {
@@ -50,7 +26,7 @@ class ConfigSetType extends \Espo\Core\Formula\Functions\Base
         }
 
         if (count($item->value) < 2) {
-            throw new Error('\'configSet\' needs a configuration item and a setting.');
+            throw new Error('\'configSet\' needs a configuration item and a setting.'); 
         }
 
         $cfg_key = $this->evaluate($item->value[0]);
@@ -69,7 +45,7 @@ class ConfigSetType extends \Espo\Core\Formula\Functions\Base
         $entityRepos = $this->getInjection('entityManager')->getRepository($entityType);
 
         $e = $entityRepos->select(['id', 'type'])->findOne($selectParams);
-        if ($e) {
+        if ($e) { 
             $type = $e->get('type');
             $cfg_entity = $entityRepos->get($e->id);
 
@@ -79,7 +55,11 @@ class ConfigSetType extends \Espo\Core\Formula\Functions\Base
                $cfg_entity->set('valueString', $setting);
             } else if ($type == 'real') {
                $cfg_entity->set('valueReal', $setting);
-            }
+            } else if ($type == 'text') {
+               $cfg_entity->set('valueText', $setting);
+            } else if ($type == 'script') {
+               $cfg_entity->set('valueScript', $setting);
+	    }
 
             $entityRepos->save($cfg_entity);
         } else {

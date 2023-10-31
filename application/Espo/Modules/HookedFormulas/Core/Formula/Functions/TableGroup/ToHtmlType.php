@@ -87,7 +87,7 @@ class ToHtmlType extends \Espo\Core\Formula\Functions\Base
 
                 $val = $row[$j];
                 if (is_array($val)) {
-                    if (isset($val['target'])) { $target = ' target="'.$val['target'].'" '; }
+                    if (isset($val['target'])) { $target = ' target="'.val['target'].'" '; }
                     else { $target = ''; }
                     $title = htmlentities($this->filterEmail($val['val']));
                     $val = '<a href="'.$val['href'].'"'.$target.'>'.htmlentities($val['val']).'</a>';
