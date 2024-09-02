@@ -44,8 +44,9 @@ class AddType extends \Espo\Core\Formula\Functions\Base
 
         $table = $this->evaluate($item->value[0]);
         $ncols = count($table->header);
+        $value_count = count($item->value);
 
-        if (count($item->value) != ($ncols + 1)) throw new Error('Formula table\add: needs '.$ncols.' columns as arguments.');
+        if ($value_count != ($ncols + 1)) throw new Error('Formula table\add: needs '.$ncols.' columns as arguments, has: '.($value_count - 1).'.');
 
         $row = [];
         for($i = 1; $i <= $ncols; $i++ ) {

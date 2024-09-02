@@ -37,7 +37,7 @@ class CopyType extends \Espo\Core\Formula\Functions\Base
     {
         $args = $this->fetchRawArguments($item);
 
-        if (count($args) < 2) {
+        if (count($args) != 1) {
             throw new Error("Function \'hash\\copy\' should receive 1 argument.");
         }
 

@@ -1,203 +1,484 @@
 {
-  "functionClassNameMap": {
-	"Exec": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExecType",
-	"exec": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExecType",
-
-	"Table\\New": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\NewType",
-	"Table\\new": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\NewType",
-	"table\\New": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\NewType",
-	"table\\new": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\NewType",
-	"Table\\Add": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\AddType",
-	"Table\\add": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\AddType",
-	"table\\Add": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\AddType",
-	"table\\add": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\AddType",
-	"Table\\RowsPerPage": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\RowsPerPageType",
-	"Table\\rowsPerPage": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\RowsPerPageType",
-	"table\\RowsPerPage": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\RowsPerPageType",
-	"table\\rowsPerPage": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\RowsPerPageType",
-	"Table\\Filename": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\FilenameType",
-	"Table\\filename": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\FilenameType",
-	"table\\Filename": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\FilenameType",
-	"table\\filename": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\FilenameType",
-	"Table\\Style": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\StyleType",
-	"Table\\style": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\StyleType",
-	"table\\Style": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\StyleType",
-	"table\\style": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\StyleType",
-	"Table\\Link": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\LinkType",
-	"Table\\link": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\LinkType",
-	"table\\Link": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\LinkType",
-	"table\\link": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\LinkType",
-	"Table\\ToHtml": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\ToHtmlType",
-	"Table\\toHtml": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\ToHtmlType",
-	"table\\ToHtml": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\ToHtmlType",
-	"table\\toHtml": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\ToHtmlType",
-
-	"Attr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\AttrType",
-	"attr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\AttrType",
-	"SetAttr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\SetAttrType",
-	"setAttr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\SetAttrType",
-
-	"LogAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
-	"logAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
-	"Logadd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
-	"logadd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
-	"Log": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogType",
-	"log": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogType",
-
-	"StrAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StrAddType",
-	"strAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StrAddType",
-
-	"ToInt": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToIntType",
-	"toInt": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToIntType",
-	"ToDouble": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToDoubleType",
-	"toDouble": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToDoubleType",
-	"ToString": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToStringType",
-	"toString": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToStringType",
-
-	"ConfigExists": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigExistsType",
-	"configExists": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigExistsType",
-	"ConfigGet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigGetType",
-	"configGet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigGetType",
-	"ConfigInc": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigIncType",
-	"configInc": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigIncType",
-	"ConfigSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigSetType",
-	"configSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigSetType",
-	"ConfigClearCache": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigClearCacheType",
-	"configClearCache": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigClearCacheType",
-
-	"While": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\WhileType",
-	"while": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\WhileType",
-
-	"Array\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
-	"array\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
-	"Array\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
-	"array\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
-
-	"Entity\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetType",
-	"entity\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetType",
-	"Entity\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetType",
-	"entity\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetType",
-	"Entity\\Save": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\SaveType",
-	"entity\\Save": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\SaveType",
-	"Entity\\save": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\SaveType",
-	"entity\\save": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\SaveType",
-	"Entity\\This": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\ThisType",
-	"entity\\This": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\ThisType",
-	"Entity\\this": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\ThisType",
-	"entity\\this": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\ThisType",
-	"Entity\\GetMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetManyType",
-	"entity\\GetMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetManyType",
-	"Entity\\getMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetManyType",
-	"entity\\getMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetManyType",
-	"Entity\\GetRelated": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetRelatedType",
-	"entity\\GetRelated": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetRelatedType",
-	"Entity\\getRelated": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetRelatedType",
-	"entity\\getRelated": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetRelatedType",
-	
-	"Ext\\Begin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\BeginType",
-	"ext\\Begin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\BeginType",
-	"Ext\\begin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\BeginType",
-	"ext\\begin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\BeginType",
-	"Ext\\Commit": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CommitType",
-	"ext\\Commit": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CommitType",
-	"Ext\\commit": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CommitType",
-	"ext\\commit": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CommitType",
-	"Ext\\Htmlize": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\HtmlizeType",
-	"ext\\Htmlize": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\HtmlizeType",
-	"Ext\\htmlize": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\HtmlizeType",
-	"ext\\htmlize": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\HtmlizeType",
-        "Ext\\CopyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
-        "ext\\CopyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
-        "Ext\\copyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
-        "ext\\copyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
-	
-	"Ext\\Pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
-	"Ext\\Pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
-	"Ext\\pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
-	"Ext\\pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
-	"ext\\Pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
-	"ext\\Pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
-	"ext\\pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
-	"ext\\pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
-	
-	"Global\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\GetType",
-	"Global\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\GetType",
-	"global\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\GetType",
-	"global\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\GetType",
-	"Global\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\SetType",
-	"Global\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\SetType",
-	"global\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\SetType",
-	"global\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\SetType",
-	"Global\\IsSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
-	"Global\\isSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
-	"global\\IsSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
-	"global\\isSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
-	"Global\\isset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
-	"global\\isset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
-	"Global\\UnSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
-	"Global\\unSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
-	"global\\UnSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
-	"global\\unSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
-	"Global\\unset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
-	"global\\unset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
-	
-	"Hash\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\GetType",
-	"Hash\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\GetType",
-	"hash\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\GetType",
-	"hash\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\GetType",
-	"Hash\\Keys": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\KeysType",
-	"Hash\\keys": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\KeysType",
-	"hash\\Keys": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\KeysType",
-	"hash\\keys": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\KeysType",
-	"Hash\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\SetType",
-	"Hash\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\SetType",
-	"hash\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\SetType",
-	"hash\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\SetType",
-	"Hash\\IsSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
-	"Hash\\isSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
-	"hash\\IsSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
-	"hash\\isSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
-	"Hash\\isset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
-	"hash\\ssset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
-	"Hash\\UnSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
-	"Hash\\unSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
-	"hash\\UnSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
-	"hash\\unSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
-	"Hash\\unset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
-	"hash\\unset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
-	"Hash\\New": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\NewType",
-	"Hash\\new": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\NewType",
-	"hash\\New": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\NewType",
-	"hash\\new": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\NewType",
-	
-	"Record\\FetchManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyHashType",
-	"Record\\fetchManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyHashType",
-	"record\\FetchManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyHashType",
-	"record\\fetchManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyHashType",
-	"Record\\FetchMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyType",
-	"Record\\fetchMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyType",
-	"record\\FetchMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyType",
-	"record\\fetchMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyType",
-	"Record\\FetchRelatedManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyHashType",
-	"Record\\fetchRelatedManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyHashType",
-	"record\\FetchRelatedManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyHashType",
-	"record\\fetchRelatedManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyHashType",
-	"Record\\FetchRelatedMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyType",
-	"Record\\fetchRelatedMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyType",
-	"record\\FetchRelatedMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyType",
-	"record\\fetchRelatedMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyType",
-	"Record\\CountRel": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\CountRelType",
-	"Record\\countRel": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\CountRelType",        
-	"record\\CountRel": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\CountRelType",        
-	"record\\countRel": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\CountRelType",        
-	"Record\\FindMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FindManyType",
-	"Record\\findMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FindManyType",
-	"record\\FindMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FindManyType",
-	"record\\findMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FindManyType",
-	"Record\\Recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
-	"Record\\recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
-	"record\\Recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
-	"record\\recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType"
-	
-  }
+	"functionList": [
+		"__APPEND__",
+		{
+			"name": "exec",
+			"insertText": "exec(STRING)",
+			"returnType": "string"
+		},
+		{
+			"name": "table\\new",
+			"insertText": "table\\new(COLUMNS)",
+			"returnType": "string"
+		},
+		{
+			"name": "table\\add",
+			"insertText": "table\\add(TABLE, COLUMNS)",
+			"returnType": "string"
+		},
+		{
+			"name": "table\\filename",
+			"insertText": "table\\filename(TABLE, FILENAME)",
+			"returnType": "string"
+		},
+		{
+			"name": "table\\style",
+			"insertText": "table\\style(TABLE, STYLE)",
+			"returnType": "string"
+		},
+		{
+			"name": "table\\link",
+			"insertText": "table\\link(HREF, VALUE, [TARGET])",
+			"returnType": "string"
+		},
+		{
+			"name": "table\\toHtml",
+			"insertText": "table\\toHtml(TABLE)",
+			"returnType": "string"
+		},
+		{
+			"name": "attr",
+			"insertText": "attr(ENTITY, VALUE)",
+			"returnType": "string"
+		},
+		{
+			"name": "setAttr",
+			"insertText": "setAttr(ENTITY, ATTR, VALUE)",
+			"returnType": "string"
+		},
+		{
+			"name": "diff",
+			"insertText": "diff(ENTITY1, ENTITY2)",
+			"returnType": "string"
+		},
+		{
+			"name": "logadd",
+			"insertText": "logadd(VARIABLE)",
+			"returnType": "string"
+		},
+		{
+			"name": "log",
+			"insertText": "log(TYPE, STRING)",
+			"returnType": "string"
+		},
+		{
+			"name": "strAdd",
+			"insertText": "strAdd(VARIABLE)",
+			"returnType": "string"
+		},
+                {
+                        "name": "toJsonFile",
+                        "insertText": "toJsonFile(FILENAME, VALUE)",
+                        "returnType": "void"
+                },
+		{
+			"name": "toInt",
+			"insertText": "toInt(STRING)",
+			"returnType": "int"
+		},
+		{
+			"name": "toDouble",
+			"insertText": "toDouble(STRING)",
+			"returnType": "float"
+		},
+		{
+			"name": "toString",
+			"insertText": "toString(VARIABLE)",
+			"returnType": "string"
+		},
+		{
+			"name": "configExists",
+			"insertText": "configExists(CONFIG)",
+			"returnType": "string"
+		},
+		{
+			"name": "configGet",
+			"insertText": "configGet(CONFIG)",
+			"returnType": "string"
+		},
+		{
+			"name": "configInc",
+			"insertText": "configInc(CONFIG)",
+			"returnType": "string"
+		},
+		{
+			"name": "configSet",
+			"insertText": "configSet(CONFIG, SETTING)",
+			"returnType": "string"
+		},
+		{
+			"name": "configClearCache",
+			"insertText": "configClearCache()",
+			"returnType": "null"
+		},
+		{
+			"name": "while",
+			"insertText": "while(CONDITION, STATEMENT)",
+			"returnType": "string"
+		},
+		{
+			"name": "array\\set",
+			"insertText": "array\\set(ARRAY, INDEX, VALUE)",
+			"returnType": "string"
+		},
+		{
+			"name": "entity\\get",
+			"insertText": "entity\\get(ENTITY_TYPE, ID)",
+			"returnType": "entity"
+		},
+		{
+			"name": "entity\\save",
+			"insertText": "entity\\save(ENTITY)",
+			"returnType": "string"
+		},
+		{
+			"name": "entity\\this",
+			"insertText": "entity\\this()",
+			"returnType": "entity"
+		},
+		{
+			"name": "entity\\getMany",
+			"insertText": "entity\\getMany(ENTITY, LIMIT)",
+			"returnType": "string"
+		},
+		{
+			"name": "entity\\getRelated",
+			"insertText": "entity\\getRelated(ENTITY, LINK, LIMIT)",
+			"returnType": "string"
+		},
+		{
+			"name": "ext\\begin",
+			"insertText": "ext\\begin()",
+			"returnType": "string"
+		},
+		{
+			"name": "ext\\commit",
+			"insertText": "ext\\commit()",
+			"returnType": "string"
+		},
+		{
+			"name": "ext\\htmlize",
+			"insertText": "ext\\htmlize(TEMPLATE, ENTITY_TYPE, ID)",
+			"returnType": "string"
+		},
+		{
+			"name": "ext\\copyFile",
+			"insertText": "ext\\copyFile(FILE_ID, ENTITY)",
+			"returnType": "string"
+		},
+		{
+			"name": "ext\\pdf\\fillin",
+			"insertText": "ext\\pdf\\fillin(ENTITY, ENTITY_ID, DOCUMENT_ID, FILENAME)",
+			"returnType": "string"
+		},
+		{
+			"name": "global\\get",
+			"insertText": "global\\get(KEY)",
+			"returnType": "string"
+		},
+		{
+			"name": "global\\set",
+			"insertText": "global\\set(KEY, VALUE)",
+			"returnType": "string"
+		},
+		{
+			"name": "global\\isset",
+			"insertText": "global\\isset(KEY)",
+			"returnType": "bool"
+		},
+		{
+			"name": "global\\unset",
+			"insertText": "global\\unset(KEY)",
+			"returnType": "string"
+		},
+		{
+			"name": "hash\\get",
+			"insertText": "hash\\get(HASH, KEY)",
+			"returnType": "string"
+		},
+		{
+			"name": "hash\\keys",
+			"insertText": "hash\\keys(HASH)",
+			"returnType": "string"
+		},
+		{
+			"name": "hash\\set",
+			"insertText": "hash\\set(HASH, KEY, VALUE)",
+			"returnType": "string"
+		},
+		{
+			"name": "hash\\isset",
+			"insertText": "hash\\isset(HASH, KEY)",
+			"returnType": "string"
+		},
+		{
+			"name": "hash\\unset",
+			"insertText": "hash\\unset(HASH, KEY)",
+			"returnType": "string"
+		},
+		{
+			"name": "hash\\new",
+			"insertText": "hash\\new()",
+			"returnType": "string"
+		},
+		{
+			"name": "record\\fetchManyHash",
+			"insertText": "record\\fetchManyHash(RECORD)",
+			"returnType": "string"
+		},
+		{
+			"name": "record\\fetchMany",
+			"insertText": "record\\fetchMany(RECORD)",
+			"returnType": "string"
+		},
+		{
+			"name": "record\\fetchRelatedManyHash",
+			"insertText": "record\\fetchRelatedManyHash(RECORD)",
+			"returnType": "string"
+		},
+		{
+			"name": "record\\fetchRelatedMany",
+			"insertText": "record\\fetchRelatedMany(RECORD)",
+			"returnType": "string"
+		},
+		{
+			"name": "record\\countRel",
+			"insertText": "record\\countRel(RECORD)",
+			"returnType": "string"
+		},
+		{
+			"name": "record\\findMany",
+			"insertText": "record\\findMany(ENTITY_TYPE, ORDER_BY, ORDER)",
+			"returnType": "string"
+		},
+		{
+			"name": "record\\recalculate",
+			"insertText": "record\\recalculate(ENTITY_TYPE, CONDITION)",
+			"returnType": "string"
+		},
+		{
+			"name": "string\\tobase64",
+			"insertText": "string\\tobase64(STRING)",
+			"returnType": "string"
+		}
+	],
+	"functionClassNameMap": {
+		"Exec": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExecType",
+		"exec": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExecType",
+    
+		"Table\\New": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\NewType",
+		"Table\\new": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\NewType",
+		"table\\New": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\NewType",
+		"table\\new": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\NewType",
+		"Table\\Add": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\AddType",
+		"Table\\add": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\AddType",
+		"table\\Add": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\AddType",
+		"table\\add": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\AddType",
+		"Table\\RowsPerPage": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\RowsPerPageType",
+		"Table\\rowsPerPage": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\RowsPerPageType",
+		"table\\RowsPerPage": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\RowsPerPageType",
+		"table\\rowsPerPage": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\RowsPerPageType",
+		"Table\\Filename": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\FilenameType",
+		"Table\\filename": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\FilenameType",
+		"table\\Filename": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\FilenameType",
+		"table\\filename": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\FilenameType",
+		"Table\\Style": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\StyleType",
+		"Table\\style": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\StyleType",
+		"table\\Style": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\StyleType",
+		"table\\style": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\StyleType",
+		"Table\\Link": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\LinkType",
+		"Table\\link": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\LinkType",
+		"table\\Link": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\LinkType",
+		"table\\link": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\LinkType",
+		"Table\\ToHtml": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\ToHtmlType",
+		"Table\\toHtml": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\ToHtmlType",
+		"table\\ToHtml": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\ToHtmlType",
+		"table\\toHtml": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\TableGroup\\ToHtmlType",
+    
+		"Attr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\AttrType",
+		"attr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\AttrType",
+		"SetAttr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\SetAttrType",
+		"setAttr": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\SetAttrType",
+    
+		"Diff": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\DiffType",
+		"diff": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\DiffType",
+    
+		"LogAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
+		"logAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
+		"Logadd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
+		"logadd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogAddType",
+		"Log": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogType",
+		"log": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\LogType",
+    
+		"StrAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StrAddType",
+		"strAdd": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StrAddType",
+    
+                "toJsonFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToJsonFileType",
+                "ToJsonFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToJsonFileType",
+    
+		"ToInt": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToIntType",
+		"toInt": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToIntType",
+		"ToDouble": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToDoubleType",
+		"toDouble": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToDoubleType",
+		"ToString": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToStringType",
+		"toString": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ToStringType",
+    
+		"ConfigExists": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigExistsType",
+		"configExists": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigExistsType",
+		"ConfigGet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigGetType",
+		"configGet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigGetType",
+		"ConfigInc": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigIncType",
+		"configInc": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigIncType",
+		"ConfigSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigSetType",
+		"configSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigSetType",
+		"ConfigClearCache": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigClearCacheType",
+		"configClearCache": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigClearCacheType",
+    
+		"While": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\WhileType",
+		"while": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\WhileType",
+    
+		"Array\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
+		"array\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
+		"Array\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
+		"array\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
+    
+		"Entity\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetType",
+		"entity\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetType",
+		"Entity\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetType",
+		"entity\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetType",
+		"Entity\\Save": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\SaveType",
+		"entity\\Save": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\SaveType",
+		"Entity\\save": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\SaveType",
+		"entity\\save": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\SaveType",
+		"Entity\\This": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\ThisType",
+		"entity\\This": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\ThisType",
+		"Entity\\this": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\ThisType",
+		"entity\\this": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\ThisType",
+		"Entity\\GetMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetManyType",
+		"entity\\GetMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetManyType",
+		"Entity\\getMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetManyType",
+		"entity\\getMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetManyType",
+		"Entity\\GetRelated": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetRelatedType",
+		"entity\\GetRelated": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetRelatedType",
+		"Entity\\getRelated": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetRelatedType",
+		"entity\\getRelated": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EntityGroup\\GetRelatedType",
+    
+		"Ext\\Begin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\BeginType",
+		"ext\\Begin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\BeginType",
+		"Ext\\begin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\BeginType",
+		"ext\\begin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\BeginType",
+		"Ext\\Commit": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CommitType",
+		"ext\\Commit": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CommitType",
+		"Ext\\commit": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CommitType",
+		"ext\\commit": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CommitType",
+		"Ext\\Htmlize": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\HtmlizeType",
+		"ext\\Htmlize": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\HtmlizeType",
+		"Ext\\htmlize": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\HtmlizeType",
+		"ext\\htmlize": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\HtmlizeType",
+		"Ext\\CopyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
+		"ext\\CopyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
+		"Ext\\copyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
+		"ext\\copyFile": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\CopyFileType",
+    
+		"Ext\\Pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
+		"Ext\\Pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
+		"Ext\\pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
+		"Ext\\pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
+		"ext\\Pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
+		"ext\\Pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
+		"ext\\pdf\\Fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
+		"ext\\pdf\\fillin": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ExtGroup\\PdfGroup\\FillinType",
+    
+		"Global\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\GetType",
+		"Global\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\GetType",
+		"global\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\GetType",
+		"global\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\GetType",
+		"Global\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\SetType",
+		"Global\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\SetType",
+		"global\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\SetType",
+		"global\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\SetType",
+		"Global\\IsSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
+		"Global\\isSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
+		"global\\IsSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
+		"global\\isSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
+		"Global\\isset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
+		"global\\isset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\IssetType",
+		"Global\\UnSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
+		"Global\\unSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
+		"global\\UnSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
+		"global\\unSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
+		"Global\\unset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
+		"global\\unset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\GlobalGroup\\UnsetType",
+    
+		"Hash\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\GetType",
+		"Hash\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\GetType",
+		"hash\\Get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\GetType",
+		"hash\\get": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\GetType",
+		"Hash\\Copy": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\CopyType",
+		"Hash\\copy": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\CopyType",
+		"hash\\Copy": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\CopyType",
+		"hash\\copy": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\CopyType",
+		"Hash\\Keys": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\CopyType",
+		"Hash\\keys": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\CopyType",
+		"hash\\Keys": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\CopyType",
+		"hash\\keys": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\CopyType",
+		"Hash\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\SetType",
+		"Hash\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\SetType",
+		"hash\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\SetType",
+		"hash\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\SetType",
+		"Hash\\IsSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
+		"Hash\\isSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
+		"hash\\IsSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
+		"hash\\isSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
+		"Hash\\isset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
+		"hash\\isset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\IssetType",
+		"Hash\\UnSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
+		"Hash\\unSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
+		"hash\\UnSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
+		"hash\\unSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
+		"Hash\\unset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
+		"hash\\unset": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\UnsetType",
+		"Hash\\New": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\NewType",
+		"Hash\\new": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\NewType",
+		"hash\\New": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\NewType",
+		"hash\\new": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\HashGroup\\NewType",
+    
+		"Record\\FetchManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyHashType",
+		"Record\\fetchManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyHashType",
+		"record\\FetchManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyHashType",
+		"record\\fetchManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyHashType",
+		"Record\\FetchMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyType",
+		"Record\\fetchMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyType",
+		"record\\FetchMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyType",
+		"record\\fetchMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchManyType",
+		"Record\\FetchRelatedManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyHashType",
+		"Record\\fetchRelatedManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyHashType",
+		"record\\FetchRelatedManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyHashType",
+		"record\\fetchRelatedManyHash": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyHashType",
+		"Record\\FetchRelatedMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyType",
+		"Record\\fetchRelatedMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyType",
+		"record\\FetchRelatedMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyType",
+		"record\\fetchRelatedMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FetchRelatedManyType",
+		"Record\\CountRel": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\CountRelType",
+		"Record\\countRel": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\CountRelType",
+		"record\\CountRel": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\CountRelType",
+		"record\\countRel": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\CountRelType",
+		"Record\\FindMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FindManyType",
+		"Record\\findMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FindManyType",
+		"record\\FindMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FindManyType",
+		"record\\findMany": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\FindManyType",
+		"Record\\Recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
+		"Record\\recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
+		"record\\Recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
+		"record\\recalculate": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\RecordGroup\\RecalculateType",
+    
+		"string\\tobase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"String\\tobase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"string\\Tobase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"String\\Tobase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"string\\ToBase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"String\\ToBase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"string\\toBase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type",
+		"String\\toBase64": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\StringGroup\\Tobase64Type"
+	}
 }

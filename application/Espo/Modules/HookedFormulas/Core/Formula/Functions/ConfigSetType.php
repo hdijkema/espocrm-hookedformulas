@@ -63,9 +63,10 @@ class ConfigSetType extends Config
 
             $entityRepos->save($cfg_entity);
         } else {
-           throw new Error('\'configSet\', cannot get config item \''.$value.'\'');
+           throw new Error('\'configSet\', cannot set config item \''.$value.'\'');
         }
 
-        return parent::set($cfg_key, $setting);
+        #return parent::set($cfg_key, $setting);
+        return true;
     }
 }

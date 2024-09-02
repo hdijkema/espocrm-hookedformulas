@@ -46,7 +46,7 @@ class ConfigGetType extends Config
         $selectParams['whereClause'] = $whereClause;
 
 
-        $e = $this->getInjection('entityManager')->getRepository($entityType)->select(['id', 'type', 'valueInt', 'valueString', 'valueReal', 'valueDocId', 'valueScript' ])->findOne($selectParams);
+        $e = $this->getInjection('entityManager')->getRepository($entityType)->select(['id', 'type', 'valueInt', 'valueString', 'valueReal', 'valueText', 'valueDocId', 'valueScript' ])->findOne($selectParams);
         if ($e) { 
             $type = $e->get('type');
             if ($type == 'int') {
@@ -59,6 +59,8 @@ class ConfigGetType extends Config
                return parent::set($cfg_key, $e->get('valueDocId'));
             } else if ($type == 'script') {
                return parent::set($cfg_key, $e->get('valueScript')); 
+            } else if ($type == 'text') {
+               return parent::set($cfg_key, $e->get('valueText')); 
             } else {
               throw new Error('\'configGet\', type '.$type.' is not supported');
             }
