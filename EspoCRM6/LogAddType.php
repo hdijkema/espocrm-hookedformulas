@@ -51,7 +51,7 @@ class LogAddType extends \Espo\Core\Formula\Functions\Base
         }
 
         if (!is_array($item->value)) {
-            throw new Error('Value for \'strAdd\' item is not array.');
+            throw new Error('Value for \'LogAdd\' item is not array.');
         }
 
         $result = '';
@@ -64,7 +64,7 @@ class LogAddType extends \Espo\Core\Formula\Functions\Base
         foreach ($item->value as $subItem) {
             if ($first) {
                if ($subItem->type != 'attribute' && $subItem->type != 'variable') {
-                   throw new Error('First argument of \'strAdd\' must be the variable');
+                   throw new Error('First argument of \'LogAdd\' must be the variable');
                } else {
                    $var = $subItem->value;
                    $type = $subItem->type;
@@ -74,6 +74,8 @@ class LogAddType extends \Espo\Core\Formula\Functions\Base
             } else if ($second) {
                $k = $this->evaluate($subItem);
                if ($k == 'info' || $k == 'error' || $k == 'warning') {
+                  $kind = $k;
+               } else if (preg_match('/^#[0-9a-fA-F]{6}$/', $k)) {
                   $kind = $k;
                } else {
                   $result .= $k;
@@ -97,7 +99,11 @@ class LogAddType extends \Espo\Core\Formula\Functions\Base
 
         $log_line = "";
         if ($result != '') {
-            $log_line = "$var_value<tr><td class=\"time\">$dt</td><td class=\"$kind\">".htmlentities($result)."</td></tr>";
+            if (preg_match('/^#[0-9a-fA-F]{6}$/', $kind)) {
+               $log_line = "$var_value<tr><td class=\"time\">$dt</td><td style=\"background: $kind;\">".htmlentities($result)."</td></tr>";
+            } else {
+               $log_line = "$var_value<tr><td class=\"time\">$dt</td><td class=\"$kind\">".htmlentities($result)."</td></tr>";
+            }
         }
 
         if ($type == 'attribute') {
