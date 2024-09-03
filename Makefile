@@ -15,5 +15,8 @@ uninstall:
 	bash ./build-hookedformulas.sh uninstall
 
 espocrm6_install:
+	cp EspoCRM6/LogAddType.php ../../../application/Espo/Modules/HookedFormulas/Core/Formula/Functions/
+	cp EspoCRM6/ConfigSetType.php ../../../application/Espo/Modules/HookedFormulas/Core/Formula/Functions/
+
 
 	
