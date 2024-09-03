@@ -1,5 +1,4 @@
 
-
 all: ext
 	@echo "Extension built, you should be able to install it using EspoCRM extension installer"
 
@@ -15,5 +14,6 @@ install:
 uninstall:
 	bash ./build-hookedformulas.sh uninstall
 
+espocrm6_install:
 
 	
