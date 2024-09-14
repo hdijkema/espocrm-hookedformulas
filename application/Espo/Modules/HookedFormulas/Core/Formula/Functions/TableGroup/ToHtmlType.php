@@ -32,7 +32,7 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\TableGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class ToHtmlType extends \Espo\Core\Formula\Functions\Base
+class ToHtmlType extends \Espo\Core\Formula\Functions\Base 
 {
     private function filterEmail($e) 
     {
@@ -47,9 +47,6 @@ class ToHtmlType extends \Espo\Core\Formula\Functions\Base
 
         if (count($item->value) != 1) throw new Error("Formula table\\toHtml: needs <table> as argument.");
 
-        $var = $item->value[0]->value;
-        $type = $item->value[0]->type;
-
         $table = $this->evaluate($item->value[0]);
         $ncols = count($table->header);
 
@@ -60,13 +57,51 @@ class ToHtmlType extends \Espo\Core\Formula\Functions\Base
         $ncols = count($cols);
         $nrows = count($rows);
 
+        $columns = [];
+        $order = [];
+        $has_widths = false; 
+        for($i = 0; $i < $ncols; $i++) {
+            if (isset($cols[$i]['sort'])) {
+                $order_obj = (object)[];
+                $order_obj->index = $i;
+                $order_obj->sort = $cols[$i]['sort'];
+                array_push($order, $order_obj);
+            }
+            $col_obj = (object)[];
+            if (isset($cols[$i]['width'])) {
+                $col_obj->width = $cols[$i]['width'] . '%';
+                $has_widths = true;
+            }
+            if (isset($cols[$i]['align'])) {
+                $col_obj->className = 'dt-' . $cols[$i]['align'];
+            } 
+            array_push($columns, $col_obj);
+        }
+
+        $filename = $table->filename;
         $id = 'data_table_id_' . uniqid();
+
         $html = '';
         $html .= '<div class="datatable">';
-        $html .= '<table id="'.$id.'"><thead><tr>';
+        $html .= '<table id="' . $id . '"' .
+                      ' filename="' . $filename . '"' .
+                      ' order="' . base64_encode(json_encode($order)) . '"' . 
+                      ' columns="' . base64_encode(json_encode($columns)) . '"' .
+                      ' pagelength="' . $table->rows_per_page . '"' .
+                      ' has_widths="' . $has_widths . '"' . 
+                      '><thead><tr>';
+
         for($i = 0; $i < $ncols; $i++) {
             $column = htmlentities($cols[$i]['column']);
             
+            if (isset($cols[$i]['align'])) {
+                $align = $cols[$i]['align'];
+                if ($align == 'right') { $align = 'center'; }	// The header is left aligned or centered. We assume that right aligned column headers are not what we want, 
+                                                                // Although right aligned entries are exactly what one wants. 
+                $align = 'text-align:'. $align . ';';
+            } else {
+                $align = '';
+            }
 
             if ($align != '') {
                 $th = '<th style="'.$align.'">';
@@ -87,7 +122,7 @@ class ToHtmlType extends \Espo\Core\Formula\Functions\Base
 
                 $val = $row[$j];
                 if (is_array($val)) {
-                    if (isset($val['target'])) { $target = ' target="'.val['target'].'" '; }
+                    if (isset($val['target'])) { $target = ' target="'.$val['target'].'" '; }
                     else { $target = ''; }
                     $title = htmlentities($this->filterEmail($val['val']));
                     $val = '<a href="'.$val['href'].'"'.$target.'>'.htmlentities($val['val']).'</a>';
@@ -123,56 +158,8 @@ class ToHtmlType extends \Espo\Core\Formula\Functions\Base
             $html .= '</tr>';
         }
 
-        $columns = '[ ';
-        $ccomma = '';
-        $order = '[ ';
-        $comma = '';
-        $has_widths = false; 
-        for($i = 0; $i < $ncols; $i++) {
-            if (isset($cols[$i]['sort'])) {
-                $order .= $comma;
-                $order .= "[ ".$i.", '".$cols[$i]['sort']."' ]";
-                $comma = ', ';
-            }
-            $columns .= $ccomma;
-            $columns .= '{ ';
-            $cc = '';
-            if (isset($cols[$i]['width'])) {
-                $columns .= "width: '".$cols[$i]['width']."%'";
-                $has_widths = true;
-                $cc = ', ';
-            }
-            if (isset($cols[$i]['align'])) {
-                $columns .= $cc . "className: 'dt-".$cols[$i]['align']."'";
-            } 
-            $columns .= ' }';
-            $ccomma = ', ';
-        }
-        $order .= ' ]';
-        $columns .= ' ]';
-
         $html .= '</tbody></table>';
 
-        $html .= '<script>';
-        $html .= "{ var el = $('#".$id."');"; 
-        $html .= 'el.DataTable( { ';
-        $html .= "  dom: 'Bfrtip', ";
-
-        if ($table->filename != '') {
-            $html .= "buttons: [ { name:'copy', extend:'copy' }, ".
-                                "{ name:'excel', extend:'excel', filename:'".$table->filename."', title:null }, ".
-                                "{ name:'print', extend:'print' } ], ";
-        } else {
-            $html .= "  buttons: [ 'copy', 'excel', 'print' ], ";
-        }
-        $html .= "  order: $order, ";
-        $html .= "  pageLength: ".$table->rows_per_page.", ";
-        $html .= "  columns: ".$columns.", ";
-        if ($has_widths) {
-            $html .= "  autoWidth: false, ";
-        }
-        $html .= "} ); }";
-        $html .= '</script>';
         $html .= '</div>';
 
         return $html;

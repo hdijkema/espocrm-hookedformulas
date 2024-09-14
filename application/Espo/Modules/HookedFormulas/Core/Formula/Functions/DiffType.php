@@ -85,14 +85,12 @@ class DiffType extends \Espo\Core\Formula\Functions\Base
 
         $obj = (!$entity_old) ? $entity_new : $entity_old;
 
-        $e_fields = $obj->getFields();
-        $e_rels = $obj->getRelations();
-        $fields = [];
-        foreach($e_fields as $name => $d) { array_push($fields, $name); }
-        foreach($e_rels as $name => $d) { array_push($fields, $name); }
+        $e_fields = $obj->getAttributeList();
+        $e_rels = $obj->getRelationList();
+        $fields = $e_fields;
+	$fields = array_merge($fields, $e_rels);
 
 	foreach($fields as $field) {
-           #$GLOBALS['log']->warning("Field: $field");
            if ($field != 'modifiedAt' && $field != 'teamsIds' && $field != 'teamsNames') {
               if (!$this->has($entity_old, $field)) {
                  if ($this->has($entity_new, $field)) {

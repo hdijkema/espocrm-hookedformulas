@@ -54,6 +54,7 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
         $id = $args[1];
         $link = $args[2];
         $items = $args[3];
+        $GLOBALS['log']->warning('ITEMS:' . print_r($items, true));
 
         $orderBy = null;
         $order = null;
@@ -70,7 +71,8 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
 
         if (!$id) {
             $GLOBALS['log']->warning("Formula record\\fetchRelatedMany: Empty id.");
-            return [];
+            $obj = [ 'elements' => [], 'items' => [] ];
+            return (object) $obj;
         }
         if (!is_string($id)) throw new Error("Formula record\\fetchRelatedMany: id should be string.");
 
@@ -81,7 +83,8 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
 
         if (!$entity) {
             $GLOBALS['log']->notice("Formula record\\fetchRelatedMany: Entity {$entity} {$id} not found.");
-            return [];
+            $obj = [ 'elements' => [], 'items' => [] ];
+            return (object) $obj;
         }
 
         $metadata = $this->getInjection('metadata');
@@ -259,12 +262,9 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
             $i = $i + 2;
         }
 
- 	$items = array_map("trim", explode(',', $items));
         $metadata = $this->getInjection('metadata');
 
 	$items = ['id'];
-        #$e = $this->getInjection('entityManager')->getRepository($foreignEntityType)->select($items)->find($selectParams);
-        #return count($e);
         $e = $this->getInjection('entityManager')->getRepository($foreignEntityType)->count($selectParams);
         return $e;
     }

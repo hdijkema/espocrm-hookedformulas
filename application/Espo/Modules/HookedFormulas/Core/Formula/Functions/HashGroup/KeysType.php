@@ -38,14 +38,14 @@ class KeysType extends \Espo\Core\Formula\Functions\Base
         $args = $this->fetchRawArguments($item);
 
         if (count($args) != 1) {
-            throw new Error("Function \'hash\\get\' should receive 1 argument.");
+            throw new Error("Function \'hash\\keys\' should receive 1 argument.");
         }
 
 	$hash = $this->evaluate($args[0]);
 
-	$a = array();
+	$a = [];  
 	foreach($hash as $key => $value) {
-		array_push($a, $key);
+           array_push($a, $key);
 	}
 
 	return $a;

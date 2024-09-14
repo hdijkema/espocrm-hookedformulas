@@ -39,8 +39,7 @@ class RowsPerPageType extends \Espo\Core\Formula\Functions\Base
 
         if (count($item->value) != 2) throw new Error("Formula table\\rowsPerPage: needs <table> <rows per page> as arguments.");
 
-        $var = $item->value[0]->value;
-        $type = $item->value[0]->type;
+        $var = $item->value[0]->getName();
 
         $rows = $this->evaluate($item->value[1]);
 

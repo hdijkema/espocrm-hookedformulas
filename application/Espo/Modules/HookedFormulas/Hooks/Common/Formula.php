@@ -1,77 +1,106 @@
 <?php
-# vim: set tabstop=3:softtabstop=3:shiftwidth=3:noexpandtab
+# vim: set noai ts=4 sw=4: 
+
 namespace Espo\Modules\HookedFormulas\Hooks\Common;
-
-use Espo\ORM\Entity;
-use Espo\ORM\Query\Select;
-
-use Espo\ORM\Repository\Option\Traits\Options;
-use Espo\ORM\Repository\Option\SaveOptions;
-use Espo\ORM\Repository\Option\RemoveOptions;
-use Espo\ORM\Repository\Option\RelateOptions;
-use Espo\ORM\Repository\Option\UnrelateOptions;
-use Espo\ORM\Repository\Option\MassRelateOptions;
-
-use Espo\Core\Hook\Hook\BeforeSave;
-use Espo\Core\Hook\Hook\AfterSave;
-use Espo\Core\Hook\Hook\BeforeRemove;
-use Espo\Core\Hook\Hook\AfterRemove;
-use Espo\Core\Hook\Hook\AfterRelate;
-use Espo\Core\Hook\Hook\AfterUnrelate;
-use Espo\Core\Hook\Hook\AfterMassRelate;
 
 use Espo\Core\Formula\Manager as FormulaManager;
 use Espo\Core\Utils\Log;
 use Espo\Core\Utils\Metadata;
+use Espo\ORM\Entity;
+use Espo\ORM\Query\Select;
+
+use Espo\Core\Hook\Hook\AfterMassRelate;
+use Espo\Core\Hook\Hook\AfterRelate;
+use Espo\Core\Hook\Hook\AfterRemove;
+use Espo\Core\Hook\Hook\AfterSave;
+use Espo\Core\Hook\Hook\AfterUnrelate;
+use Espo\Core\Hook\Hook\BeforeRemove;
+use Espo\Core\Hook\Hook\BeforeSave;
+
+use Espo\ORM\Repository\Option\MassRelateOptions;
+use Espo\ORM\Repository\Option\RelateOptions;
+use Espo\ORM\Repository\Option\RemoveOptions;
+use Espo\ORM\Repository\Option\SaveOptions;
+use Espo\ORM\Repository\Option\UnrelateOptions;
+
+################################################################
+# As of EspoCRM 7.4.6 (AFAIK), the Hooks are more structured.
+# Stronger typed.
+#
+# Relation with Espo\Core\Hook\GeneralInvoker
+#
+# This general invoker looks if a $hook is an instance of something,
+# e.g. instanceof BeforeSave. 
+#
+# It also looks at instances of: 
+#   - AfterSave, 
+#   - BeforeRemove, AfterRemove, 
+#   - AfterRelate, AfterUnrelate, AfterMassRelate
+#
+# Now, the Formula class of EspoCRM implements 'BeforeSave' and 
+# nothing else. We derive from this Formula, but we also support
+# the other hooks.
+#
+# So it looks like we want to implement the other interfaces
+# to make things better.
+#
+################################################################
+
+class HDI_Options
+{
+	private $opts;
+	
+	public function __construct($o) 
+	{
+		$this->opts = $o;
+	}
+	
+	public function has(string $key): bool
+	{ 
+		return $this->opts->has($key); 
+	}
+	
+	public function set(string $opt, mixed $val): void
+	{
+		$this->opts = $this->opts->with($opt, $val);
+	}
+	
+	public function unset(string $opt): void
+	{
+		$this->opts = $this->opts->without($opt);
+	}
+	
+	public function get(string $opt): mixed
+	{
+		return $this->opts->get($opt);
+	}
+}
+
 
 class Formula extends \Espo\Hooks\Common\Formula
-		implements 	BeforeSave, AfterSave, 
-						BeforeRemove, AfterRemove, 
-						AfterRelate, AfterUnrelate, AfterMassRelate
+  implements BeforeSave, AfterSave, 
+             BeforeRemove, AfterRemove,
+             AfterRelate, AfterUnrelate,
+             AfterMassRelate
 {
-
-    private Metadata $metadata;
-    private FormulaManager $formulaManager;
-    private Log $log;
-
+    private $_formulaManager;
+    private $_metadata;
 
     public function __construct(Metadata $metadata, FormulaManager $formulaManager, Log $log)
     {
-		parent::__construct($metadata, $formulaManager, $log);
-      $this->metadata = $metadata;
-      $this->formulaManager = $formulaManager;
-      $this->log = $log;
+        $this->_metadata = $metadata;
+        $this->_formulaManager = $formulaManager;
+
+        parent::__construct($metadata, $formulaManager, $log);
     }
 
     protected function get_metadata()
     {
-        if (isset($this->metadata)) {
-           # EspoCRM >= 6.0.0
-           return $this->metadata;
-        } else { 
-           # EspoCRM < 6.0.0
-           return $this->getMetadata();
-        }
+        return $this->_metadata;
     }
 
     protected function get_formula_manager() {
-        if (isset($this->formulaManager)) {
-           # EspoCRM >= 6.0.0
-           return $this->formulaManager;
-        } else {
-           # EspoCRM < 6.0.0
-           return $this->getFormulaManager();
-        }
-    }
-
-    private function runScript(string $script, Entity $entity, stdClass $variables): void
-    {
-        try {
-            $this->formulaManager->run($script, $entity, $variables);
-        }
-        catch (Exception $e) {
-            $this->log->error('Before-save formula script failed: ' . $e->getMessage());
-        }
+        return $this->_formulaManager;
     }
 
     protected function getScript($script, $hook)
@@ -106,93 +135,109 @@ class Formula extends \Espo\Hooks\Common\Formula
         }
     }
 
-    protected function executeFormula(Entity $entity, $options)
+
+    protected function executeFormula(string $hook, Entity $entity, HDI_Options $options) : void
     {
-		if ($options->get('skipFormula')) { return; }
+		if ($options->has('skipFormula')) {
+			if (!empty($options->get('skipFormula'))) {
+				return;
+			}
+		}
 
-      $hook = $options->get('hf_hook');
 		if ($options->has('vars')) {
-	   	$variables = $options->get('vars');
-      } else {
-         $variables = (object)[];
-      }
+			$variables = $options->get('vars');
+        } else {
+           $variables = (object) [];
+        }
 
-      if ($hook == 'beforeSave') {
-         $scriptList = $this->get_metadata()->get(['formula', $entity->getEntityType(), 'beforeSaveScriptList'], []);
-         foreach ($scriptList as $script) {
-				$this->runScript($script, $entity, $variables);
-         }
-      }
-
-      $customScript = $this->get_metadata()->get(['formula', $entity->getEntityType(), 'beforeSaveCustomScript']);
-      if ($customScript) {
-			$customScript = $this->getScript($customScript, $hook);
-         if ($customScript) {
-            try {
-               $this->get_formula_manager()->run($customScript, $entity, $variables);
-            } catch (\Exception $e) {
-               $GLOBALS['log']->error('Formula failed (hook=' . $hook . '): ' . $e->getMessage());
+        if ($hook == 'beforeSave') {
+            $scriptList = $this->get_metadata()->get(['formula', $entity->getEntityType(), 'beforeSaveScriptList'], []);
+            foreach ($scriptList as $script) {
+                try {
+                    $this->get_formula_manager()->run($script, $entity, $variables);
+                } catch (\Exception $e) {
+                    $GLOBALS['log']->error('Formula failed: ' . $e->getMessage());
+                }
             }
-         }
-      }
- 	}
+        }
 
-   public function beforeSave(Entity $entity, SaveOptions $options) : void
-   {
-		$options = $options->with('hf_hook', 'beforeSave');
-      $this->executeFormula($entity, $options);
-   }
+        $customScript = $this->get_metadata()->get(['formula', $entity->getEntityType(), 'beforeSaveCustomScript']);
+        if ($customScript) {
+            $customScript = $this->getScript($customScript, $hook);
+            if ($customScript) {
+               try {
+                   $this->get_formula_manager()->run($customScript, $entity, $variables);
+               } catch (\Exception $e) {
+                   $GLOBALS['log']->error('Formula failed: ' . $e->getMessage());
+               }
+            }
+        }
+    }
+	
+    public function beforeSave(Entity $entity, SaveOptions $options): void
+    {
+		$opts = new HDI_Options($options);
+        $this->executeFormula('beforeSave', $entity, $opts);
+    }
 
-   public function afterSave(Entity $entity, SaveOptions $options) : void
-   {
-		$options = $options->with('hf_hook', 'afterSave');
-      $this->executeFormula($entity, $options);
-   }
+    public function afterSave(Entity $entity, SaveOptions $options): void
+    {
+		$opts = new HDI_Options($options);
+        $this->executeFormula('afterSave', $entity, $opts);
+    }
 
-   public function beforeRemove(Entity $entity, RemoveOptions $options) : void
-   {
-		$options = $options->with('hf_hook', 'beforeRemove');
-      $this->executeFormula($entity, $options);
-   }
+    public function beforeRemove(Entity $entity, RemoveOptions $options): void
+    {
+		$opts = new HDI_Options($options);
+        $this->executeFormula('beforeRemove', $entity, $opts);
+    }
 
-   public function afterRemove(Entity $entity, RemoveOptions $options) : void
-   {
-		$options = $options->with('hf_hook', 'afterRemove');
-		$this->executeFormula($entity, $options);
-   }
+    public function afterRemove(Entity $entity, RemoveOptions $options): void
+    {
+		$opts = new HDI_Options($options);
+        $this->executeFormula('afterRemove', $entity, $opts);
+    }
 
-   public function afterRelate(Entity $entity, string $relationName, Entity $relatedEntity, array $columnData, RelateOptions $options) : void
-   {
-		$options = $options->with('hf_hook', 'afterRelate');
-      $options['vars'] = (object) $hookdata;
-      $this->executeFormula($entity, $options);
-   }
+    public function afterRelate(Entity $entity, string $relationName, Entity $relatedEntity, array $columnData, RelateOptions $options): void
+    {
+		$hookData = [
+			'relationName' => $relationName,
+			'foreignEntity' => $relatedEntity,
+			'relationData' => $columnData
+		];
 
-   public function afterUnrelate(Entity $entity, string $relationName, Entity $relatedEntity, UnrelateOptions $options) : void
-   {
-		$options = $options->with('hf_hook', 'afterRelate');
-		$options = $options->with('relationName', $relationName);
-		$options = $options->with('relatedEntity', $relatedEntity);
-		$options = $options->with('foreignEntity', $relatedEntity);
+		$opts = new HDI_Options($options);
+		$opts->set('vars', (object) $hookData);
 
-		$vars = (object) [ 'relationName' =>  $relationName, 'foreignEntity' => $relatedEntity, 'relatedEntity' => $relatedEntity ];
-		$options = $options->with('vars', (object) $vars);
+        $this->executeFormula('afterRelate', $entity, $opts);
+    }
 
-      $this->executeFormula($entity, $options);
-   }
-
-   public function afterMassRelate(Entity $entity, string $relationName, Select $query, array $columndata, MassRelateOptions $options) : void
-   {
-		$options = $options->with('hf_hook', 'afterMassRelate');
-		$options = $options->with('relationName', $relationName);
-		$options = $options->with('query', $query);
-		$options = $options->with('columndata', $columndata);
-
-		$vars = (object) [ 'relationName' =>  $relationName ];
-		$options = $options->with('vars', (object) $vars);
-
-		$this->executeFormula($entity, $options);
-	}
+    public function afterUnrelate(Entity $entity, string $relationName, Entity $relatedEntity, UnrelateOptions $options): void
+    {
+		$hookData = [
+			'relationName' => $relationName,
+			'foreignEntity' => $relatedEntity
+		];
+		
+		$opts = new HDI_Options($options);
+		$opts->set('vars', (object) $hookData);
+		
+        $this->executeFormula('afterUnrelate', $entity, $opts);
+    }
+	
+    public function afterMassRelate(Entity $entity, string $relationName, Select $query, array $columnData, MassRelateOptions $options): void
+    {
+		$hookData = [
+			'relationName' => $relationName,
+			'query' => $query,
+			'relationData' => $columnData
+		];
+		
+		$opts = new HDI_Options($options);
+		$opts->set('vars', (object) $hookData);
+		
+        $this->executeFormula('afterMassRelate', $entity, $opts);
+    }
 
 }
 

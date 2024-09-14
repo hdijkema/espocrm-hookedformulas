@@ -39,8 +39,7 @@ class FilenameType extends \Espo\Core\Formula\Functions\Base
 
         if (count($item->value) != 2) throw new Error("Formula table\\filename: needs <table> <filename> as arguments.");
 
-        $var = $item->value[0]->value;
-        $type = $item->value[0]->type;
+        $var = $item->value[0]->getName();
 
         $filename = $this->evaluate($item->value[1]);
 

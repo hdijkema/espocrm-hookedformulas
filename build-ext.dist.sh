@@ -43,7 +43,7 @@ done
 
 if [ "$CMD" == "install" ]; then
     mkdir -p $INSTALL_FILES
-	tar cf - $TARDIRS | (cd $INSTALL_PREFIX; tar xvf - ) >$INSTALL_FILES/$MODULE
+	tar cf - $TARDIRS | (cd $INSTALL_PREFIX; tar hxvf - ) >$INSTALL_FILES/$MODULE
     FILES=`cat $INSTALL_FILES/$MODULE`
     for F in $FILES
     do
@@ -129,7 +129,7 @@ elif [ "$CMD" == "buildext" ]; then
 	echo "?>"										>>$F
 
     if [ -d $DIR/files/scripts ]; then
-        (cd $DIR/files; tar cf - scripts) | (cd $DIR; tar xvf - )
+        (cd $DIR/files; tar cf - scripts) | (cd $DIR; tar hxvf - )
         rm -rf $DIR/files/scripts
     fi
 

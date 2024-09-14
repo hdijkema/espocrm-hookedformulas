@@ -30,13 +30,82 @@
 namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\EntityGroup;
 
 use Espo\Core\Exceptions\Error;
+use Espo\Services\Record;
 
 class GetType extends \Espo\Core\Formula\Functions\Base
 {
     protected function init()
     {
         $this->addDependency('entityManager');
+        $this->addDependency('metadata');
     }
+
+    private function getEntityManager()
+    {
+        $entitymgr = $this->getInjection('entityManager');
+        return $entitymgr;
+    }
+
+    private function getMetadata()
+    {
+        return $this->getInjection('metadata');
+    }
+
+
+    private function loadEmailAddressField($entity)
+    {
+        $fieldDefs = $this->getMetadata()->get('entityDefs.' . $entity->getEntityType() . '.fields', array());
+        if (!empty($fieldDefs['emailAddress']) && $fieldDefs['emailAddress']['type'] == 'email') {
+            $dataAttributeName = 'emailAddressData';
+            $emailAddressData = $this->getEntityManager()->getRepository('EmailAddress')->getEmailAddressData($entity);
+            $entity->set($dataAttributeName, $emailAddressData);
+            $entity->setFetched($dataAttributeName, $emailAddressData);
+        }
+    }
+
+    private function loadPhoneNumberField($entity)
+    {
+        $fieldDefs = $this->getMetadata()->get('entityDefs.' . $entity->getEntityType() . '.fields', array());
+        if (!empty($fieldDefs['phoneNumber']) && $fieldDefs['phoneNumber']['type'] == 'phone') {
+            $dataAttributeName = 'phoneNumberData';
+            $phoneNumberData = $this->getEntityManager()->getRepository('PhoneNumber')->getPhoneNumberData($entity);
+            $entity->set($dataAttributeName, $phoneNumberData);
+            $entity->setFetched($dataAttributeName, $phoneNumberData);
+        }
+    }
+
+    private function loadLinkFields($entity)
+    {
+        $fieldDefs = $this->getMetadata()->get('entityDefs.' . $entity->getEntityType() . '.fields', array());
+        $linkDefs = $this->getMetadata()->get('entityDefs.' . $entity->getEntityType() . '.links', array());
+        foreach ($fieldDefs as $field => $defs) {
+            if (isset($defs['type']) && $defs['type'] === 'link') {
+                if (!empty($defs['noLoad'])) continue;
+                if (empty($linkDefs[$field])) continue;
+                if (empty($linkDefs[$field]['type'])) continue;
+                if ($linkDefs[$field]['type'] !== 'hasOne') continue;
+
+                $entity->loadLinkField($field);
+            }
+        }
+    }
+
+
+    private function loadLinkMultipleFields($entity)
+    {
+        $fieldDefs = $this->getMetadata()->get('entityDefs.' . $entity->getEntityType() . '.fields', array());
+        foreach ($fieldDefs as $field => $defs) {
+            if (isset($defs['type']) && in_array($defs['type'], ['linkMultiple', 'attachmentMultiple']) && empty($defs['noLoad'])) {
+                $columns = null;
+                if (!empty($defs['columns'])) {
+                    $columns = $defs['columns'];
+                }
+                $entity->loadLinkMultipleField($field, $columns);
+            }
+        }
+    }
+
+
 
     public function process(\StdClass $item)
     {
@@ -58,7 +127,15 @@ class GetType extends \Espo\Core\Formula\Functions\Base
         if (!$entityType) throw new Error("Formula record\\attribute: Empty entityType.");
         if (!$id) return null;
 
-        $entity = $this->getInjection('entityManager')->getEntity($entityType, $id);
+
+        $entity = $this->getEntityManager()->getEntity($entityType, $id);
+        if ($entity != null) {
+           $this->loadPhoneNumberField($entity);
+           $this->loadEmailAddressField($entity);
+           $this->loadLinkFields($entity);
+           $this->loadLinkMultipleFields($entity);
+        }
+
 
         return $entity;
     }

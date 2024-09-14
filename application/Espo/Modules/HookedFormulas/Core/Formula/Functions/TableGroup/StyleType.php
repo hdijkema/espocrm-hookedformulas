@@ -39,8 +39,7 @@ class StyleType extends \Espo\Core\Formula\Functions\Base
 
         if (count($item->value) != 2) throw new Error("Formula table\\style: needs <table> <style> as arguments.");
 
-        $var = $item->value[0]->value;
-        $type = $item->value[0]->type;
+        $var = $item->value[0]->getName();
 
         $style = $this->evaluate($item->value[1]);
         $table = $this->evaluate($item->value[0]);

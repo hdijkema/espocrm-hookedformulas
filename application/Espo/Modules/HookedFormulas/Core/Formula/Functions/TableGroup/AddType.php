@@ -36,11 +36,9 @@ class AddType extends \Espo\Core\Formula\Functions\Base
 {
     public function process(\StdClass $item)
     {
-
         if (count($item->value) < 2) throw new Error("Formula table\\add: needs <table> and <column values> as arguments.");
 
-        $var = $item->value[0]->value;
-        $type = $item->value[0]->type;
+        $var = $item->value[0]->getName();
 
         $table = $this->evaluate($item->value[0]);
         $ncols = count($table->header);

@@ -82,8 +82,8 @@ class FillinType extends \Espo\Core\Formula\Functions\Base
         $GLOBALS['log']->warning("Formula ext\\pdf\\fillin: file_id: {$file_id}");
 
         if ($filename) {
-            if (substr($fileName, -4) !== '.pdf') {
-                $fileName .= '.pdf';
+            if (substr($filename, -4) !== '.pdf') {
+                $filename .= '.pdf';
             }
         } else {
             $GLOBALS['log']->warning("Formula ext\\pdf\\fillin: filename must be given.");
@@ -101,6 +101,7 @@ class FillinType extends \Espo\Core\Formula\Functions\Base
         $pdf_out_filename = "$tmpdir/$filename";
 
         $GLOBALS['log']->warning("Formula ext\\pdf\\fillin: pdf file in: {$pdf_in_filename}");
+        $GLOBALS['log']->warning("PDF_out_filename: {$pdf_out_filename}");
 
         $pdf_errors = [];
         $pdf = new Pdf($pdf_in_filename);
@@ -114,7 +115,11 @@ class FillinType extends \Espo\Core\Formula\Functions\Base
 
         if (file_exists($pdf_out_filename)) {
             $contents = file_get_contents($pdf_out_filename);
+            $contents_size = filesize($pdf_out_filename);
+
             unlink($pdf_out_filename);
+
+            $GLOBALS['log']->warning("name=$filename, type=application/pdf, contents=$contents_size, relatedId=$entity_id, relatedType=$entity, role=Attachment");
 
             $attachment = $em->createEntity('Attachment', [
                 'name' => $filename,
@@ -124,6 +129,8 @@ class FillinType extends \Espo\Core\Formula\Functions\Base
                 'relatedType' => $entity,
                 'role' => 'Attachment',
             ]);
+
+            $GLOBALS['log']->warning("Attachment id=" . $attachment->id);
 
             return $attachment->id;
        } else {

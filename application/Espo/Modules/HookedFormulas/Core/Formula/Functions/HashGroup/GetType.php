@@ -44,6 +44,10 @@ class GetType extends \Espo\Core\Formula\Functions\Base
 	$hash = $this->evaluate($args[0]);
 	$var = $this->evaluate($args[1]);
 
-	return $hash[$var];
+        if (isset($hash[$var])) {
+	   return $hash[$var];
+        } else {
+           return null;
+        }
     }
 }
