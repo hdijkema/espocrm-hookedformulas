@@ -112,11 +112,6 @@
 			"returnType": "null"
 		},
 		{
-			"name": "while",
-			"insertText": "while(CONDITION, STATEMENT)",
-			"returnType": "string"
-		},
-		{
 			"name": "array\\set",
 			"insertText": "array\\set(ARRAY, INDEX, VALUE)",
 			"returnType": "string"
@@ -333,9 +328,6 @@
 		"configSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigSetType",
 		"ConfigClearCache": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigClearCacheType",
 		"configClearCache": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigClearCacheType",
-    
-		"While": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\WhileType",
-		"while": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\WhileType",
     
 		"Array\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
 		"array\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",

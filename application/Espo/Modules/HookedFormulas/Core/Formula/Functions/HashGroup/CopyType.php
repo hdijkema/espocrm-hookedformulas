@@ -31,11 +31,11 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\HashGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class CopyType extends \Espo\Core\Formula\Functions\Base
+class CopyType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
-        $args = $this->fetchRawArguments($item);
+        $args = $this->fetchArguments($item);
 
         if (count($args) != 1) {
             throw new Error("Function \'hash\\copy\' should receive 1 argument.");

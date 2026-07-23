@@ -32,13 +32,13 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\TableGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class AddType extends \Espo\Core\Formula\Functions\Base
+class AddType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\ContextFunction
 {
-    public function process(\StdClass $item)
+    protected function processContext(\stdClass $item): mixed
     {
         if (count($item->value) < 2) throw new Error("Formula table\\add: needs <table> and <column values> as arguments.");
 
-        $var = $item->value[0]->getName();
+        $var = $this->getArgumentName($item->value[0]);
 
         $table = $this->evaluate($item->value[0]);
         $ncols = count($table->header);

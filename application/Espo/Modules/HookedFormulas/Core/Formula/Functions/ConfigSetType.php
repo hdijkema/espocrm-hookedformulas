@@ -31,15 +31,10 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions;
 
 use \Espo\Core\Exceptions\Error;
 
-class ConfigSetType extends \Espo\Core\Formula\Functions\Base
+class ConfigSetType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\SelectBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('selectManagerFactory');
-    }
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         if (!property_exists($item, 'value')) {
             return '';
@@ -57,7 +52,7 @@ class ConfigSetType extends \Espo\Core\Formula\Functions\Base
         $setting = $this->evaluate($item->value[1]);
 
         $entityType = 'Config';
-        $selectManager = $this->getInjection('selectManagerFactory')->create($entityType);
+        $selectManager = $this->selectManagerFactory->create($entityType);
         $selectParams = $selectManager->getEmptySelectParams();
 
         $whereClause = [];
@@ -66,12 +61,16 @@ class ConfigSetType extends \Espo\Core\Formula\Functions\Base
         $whereClause[] = [$key => $value];
 
         $selectParams['whereClause'] = $whereClause;
-        $entityRepos = $this->getInjection('entityManager')->getRepository($entityType);
+        $entityRepos = $this->entityManager->getRepository($entityType);
 
-        $e = $entityRepos->select(['id', 'type'])->findOne($selectParams);
+        $e = $this->createSelectBuilderFromParams(
+            $entityType,
+            $selectParams,
+            ['id', 'type']
+        )->findOne();
         if ($e) {
             $type = $e->get('type');
-            $cfg_entity = $entityRepos->get($e->id);
+            $cfg_entity = $entityRepos->get($e->getId());
 
             if ($type == 'int') {
                $cfg_entity->set('valueInt', $setting);

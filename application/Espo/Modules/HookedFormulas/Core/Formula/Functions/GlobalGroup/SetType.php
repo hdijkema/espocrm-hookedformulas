@@ -33,9 +33,9 @@ use Espo\Core\Exceptions\Error;
 
 class SetType extends Globals
 {
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
-        $args = $this->fetchRawArguments($item);
+        $args = $this->fetchArguments($item);
 
         if (count($args) < 2) {
             throw new Error("Function \'global\\set\' should receive 2 arguments.");

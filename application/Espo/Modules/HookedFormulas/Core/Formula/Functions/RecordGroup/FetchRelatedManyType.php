@@ -33,7 +33,7 @@ use Espo\Core\Exceptions\Error;
 
 class FetchRelatedManyType extends FetchRelatedRecords
 {
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
 
         $obj = $this->fetchRecs($item);

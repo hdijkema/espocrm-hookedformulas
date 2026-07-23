@@ -33,13 +33,8 @@ use \Espo\Core\Exceptions\Error;
 
 class ConfigExistsType extends Config
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('selectManagerFactory');
-    }
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         if (!property_exists($item, 'value')) {
             return '';
@@ -58,7 +53,7 @@ class ConfigExistsType extends Config
         if (parent::has($cfg_key)) { return true; }
 
         $entityType = 'Config';
-        $selectManager = $this->getInjection('selectManagerFactory')->create($entityType);
+        $selectManager = $this->selectManagerFactory->create($entityType);
         $selectParams = $selectManager->getEmptySelectParams();
 
         $whereClause = [];
@@ -69,7 +64,11 @@ class ConfigExistsType extends Config
         $selectParams['whereClause'] = $whereClause;
 
 
-        $e = $this->getInjection('entityManager')->getRepository($entityType)->select(['id', 'type', 'valueInt', 'valueString', 'valueReal', 'valueDocId', 'valueScript' ])->findOne($selectParams);
+        $e = $this->createSelectBuilderFromParams(
+            $entityType,
+            $selectParams,
+            ['id', 'type', 'valueInt', 'valueString', 'valueReal', 'valueDocId', 'valueScript']
+        )->findOne();
         if ($e) { 
             return true;
         } else {

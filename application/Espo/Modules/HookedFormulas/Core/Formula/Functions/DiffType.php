@@ -31,7 +31,7 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions;
 
 use Espo\Core\Exceptions\Error;
 
-class DiffType extends \Espo\Core\Formula\Functions\Base
+class DiffType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
     private function getValue($v, $level = 1) 
     {
@@ -62,7 +62,7 @@ class DiffType extends \Espo\Core\Formula\Functions\Base
        return $v;
     }
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         if (!property_exists($item, 'value')) {
             throw new Error("Formula diff needs two entities as parameters");

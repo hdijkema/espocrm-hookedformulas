@@ -31,16 +31,10 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\EntityGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class GetManyType extends \Espo\Core\Formula\Functions\Base
+class GetManyType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\MetadataSelectBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('selectManagerFactory');
-        $this->addDependency('metadata');
-    }
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         $args = $this->fetchArguments($item);
 
@@ -48,7 +42,7 @@ class GetManyType extends \Espo\Core\Formula\Functions\Base
              throw new Error("Formula entity\\getMany: Too few arguments.");
         }
 
-        $entityManager = $this->getInjection('entityManager');
+        $entityManager = $this->entityManager;
 
         $entity = $args[0];
         $limit = $args[1];
@@ -61,18 +55,18 @@ class GetManyType extends \Espo\Core\Formula\Functions\Base
 
         if (!is_int($limit)) throw new Error("Formula entity\\GetRelated: limit should be int.");
 
-        $metadata = $this->getInjection('metadata');
+        $metadata = $this->metadata;
 
         if (!$orderBy) {
-            $orderBy = $metadata->get(['entityDefs', $entityType, 'collection', 'orderBy']);
+            $orderBy = $metadata->get(['entityDefs', $entity, 'collection', 'orderBy']);
             if (is_null($order)) {
-                $order = $metadata->get(['entityDefs', $entityType, 'collection', 'order']) ?? 'asc';
+                $order = $metadata->get(['entityDefs', $entity, 'collection', 'order']) ?? 'asc';
             }
         } else {
             $order = $order ?? 'asc';
         }
 
-        $selectManager = $this->getInjection('selectManagerFactory')->create($entity);
+        $selectManager = $this->selectManagerFactory->create($entity);
         $selectParams = $selectManager->getEmptySelectParams();
 
         if (count($args) <= 4) {
@@ -100,11 +94,11 @@ class GetManyType extends \Espo\Core\Formula\Functions\Base
             $selectManager->applyOrder($orderBy, $order, $selectParams);
         }
 
-        $collection = $entityManager->getRepository($entity)->select(['id'])->find($selectParams);
+        $collection = $this->createSelectBuilderFromParams($entity, $selectParams, ['id'])->find();
 
         $entities = [];   
         foreach ($collection as $e) {
-            $entities[] = $entityManager->getEntity($entity, $e->id);
+            $entities[] = $entityManager->getEntity($entity, $e->getId());
         }
         return $entities;
     }

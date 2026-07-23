@@ -32,9 +32,9 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\TableGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class LinkType extends \Espo\Core\Formula\Functions\Base
+class LinkType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
 
         $n = count($item->value);

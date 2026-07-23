@@ -32,14 +32,14 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\TableGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class StyleType extends \Espo\Core\Formula\Functions\Base
+class StyleType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\ContextFunction
 {
-    public function process(\StdClass $item)
+    protected function processContext(\stdClass $item): mixed
     {
 
         if (count($item->value) != 2) throw new Error("Formula table\\style: needs <table> <style> as arguments.");
 
-        $var = $item->value[0]->getName();
+        $var = $this->getArgumentName($item->value[0]);
 
         $style = $this->evaluate($item->value[1]);
         $table = $this->evaluate($item->value[0]);

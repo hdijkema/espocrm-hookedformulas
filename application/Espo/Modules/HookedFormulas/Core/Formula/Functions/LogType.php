@@ -27,9 +27,9 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions;
 use \Espo\ORM\Entity;
 use \Espo\Core\Exceptions\Error;
 
-class LogType extends \Espo\Core\Formula\Functions\Base
+class LogType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         if (!property_exists($item, 'value')) {
             return true;

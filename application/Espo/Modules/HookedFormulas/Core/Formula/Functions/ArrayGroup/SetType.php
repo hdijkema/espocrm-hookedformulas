@@ -31,9 +31,9 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\ArrayGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class SetType extends \Espo\Core\Formula\Functions\Base
+class SetType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         if (count($item->value) < 3) throw new Error("Formula: array\\set: Not enough arguments.");
 

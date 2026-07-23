@@ -31,11 +31,11 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\HashGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class IssetType extends \Espo\Core\Formula\Functions\Base
+class IssetType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
-        $args = $this->fetchRawArguments($item);
+        $args = $this->fetchArguments($item);
 
         if (count($args) < 2) {
             throw new Error("Function \'hash\\isset\' should receive 2 arguments.");

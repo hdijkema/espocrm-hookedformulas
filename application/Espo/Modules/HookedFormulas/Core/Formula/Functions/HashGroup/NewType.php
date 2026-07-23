@@ -31,9 +31,9 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\HashGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class NewType extends \Espo\Core\Formula\Functions\Base
+class NewType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         $hash = [];
 

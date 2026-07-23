@@ -33,13 +33,8 @@ use \Espo\Core\Exceptions\Error;
 
 $hookedformulas_config = [];
 
-abstract class Config extends \Espo\Core\Formula\Functions\Base
+abstract class Config extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\SelectBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('selectManagerFactory');
-    }
 
     protected function has($key) 
     {

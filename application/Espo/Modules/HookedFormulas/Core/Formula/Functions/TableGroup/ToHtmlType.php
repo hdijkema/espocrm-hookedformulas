@@ -32,9 +32,9 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\TableGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class ToHtmlType extends \Espo\Core\Formula\Functions\Base 
+class ToHtmlType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    private function filterEmail($e) 
+    private function filterEmail($e)
     {
         if (preg_match('/[^@]+[@][^[@]+/', $e)) {
             $e = str_replace('@', '&#64;', $e);
@@ -42,7 +42,7 @@ class ToHtmlType extends \Espo\Core\Formula\Functions\Base
         return $e;
     }
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
 
         if (count($item->value) != 1) throw new Error("Formula table\\toHtml: needs <table> as argument.");
@@ -59,7 +59,7 @@ class ToHtmlType extends \Espo\Core\Formula\Functions\Base
 
         $columns = [];
         $order = [];
-        $has_widths = false; 
+        $has_widths = false;
         for($i = 0; $i < $ncols; $i++) {
             if (isset($cols[$i]['sort'])) {
                 $order_obj = (object)[];
@@ -74,7 +74,7 @@ class ToHtmlType extends \Espo\Core\Formula\Functions\Base
             }
             if (isset($cols[$i]['align'])) {
                 $col_obj->className = 'dt-' . $cols[$i]['align'];
-            } 
+            }
             array_push($columns, $col_obj);
         }
 
@@ -85,19 +85,19 @@ class ToHtmlType extends \Espo\Core\Formula\Functions\Base
         $html .= '<div class="datatable">';
         $html .= '<table id="' . $id . '"' .
                       ' filename="' . $filename . '"' .
-                      ' order="' . base64_encode(json_encode($order)) . '"' . 
+                      ' order="' . base64_encode(json_encode($order)) . '"' .
                       ' columns="' . base64_encode(json_encode($columns)) . '"' .
                       ' pagelength="' . $table->rows_per_page . '"' .
-                      ' has_widths="' . $has_widths . '"' . 
+                      ' has_widths="' . $has_widths . '"' .
                       '><thead><tr>';
 
         for($i = 0; $i < $ncols; $i++) {
             $column = htmlentities($cols[$i]['column']);
-            
+
             if (isset($cols[$i]['align'])) {
                 $align = $cols[$i]['align'];
-                if ($align == 'right') { $align = 'center'; }	// The header is left aligned or centered. We assume that right aligned column headers are not what we want, 
-                                                                // Although right aligned entries are exactly what one wants. 
+                if ($align == 'right') { $align = 'center'; }	// The header is left aligned or centered. We assume that right aligned column headers are not what we want,
+                                                                // Although right aligned entries are exactly what one wants.
                 $align = 'text-align:'. $align . ';';
             } else {
                 $align = '';
@@ -107,7 +107,7 @@ class ToHtmlType extends \Espo\Core\Formula\Functions\Base
                 $th = '<th style="'.$align.'">';
             } else {
                 $th = '<th>';
-            } 
+            }
 
             $html .= $th.$column.'</th>';
         }

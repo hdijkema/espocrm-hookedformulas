@@ -31,16 +31,12 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\ExtGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class CommitType extends \Espo\Core\Formula\Functions\Base
+class CommitType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EntityManagerBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-    }
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
-        $em = $this->getInjection('entityManager');
+        $em = $this->entityManager;
 	return $em->getPDO()->commit();
     }
 }

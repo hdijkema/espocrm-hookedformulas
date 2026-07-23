@@ -31,13 +31,10 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\EntityGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class ThisType extends \Espo\Core\Formula\Functions\Base
+class ThisType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\ContextFunction
 {
-    protected function init()
-    {
-    }
 
-    public function process(\StdClass $item)
+    protected function processContext(\stdClass $item): mixed
     {
         return $this->getEntity();
     }

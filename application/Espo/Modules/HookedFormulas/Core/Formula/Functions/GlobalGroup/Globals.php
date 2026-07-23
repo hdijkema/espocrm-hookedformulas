@@ -33,11 +33,8 @@ use Espo\Core\Exceptions\Error;
 
 $global_group_global_vars = [ ];
 
-class Globals extends \Espo\Core\Formula\Functions\Base
+abstract class Globals extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    public function process(\StdClass $item)
-    {
-    }
 
     protected function doSet($a, $b) 
     {

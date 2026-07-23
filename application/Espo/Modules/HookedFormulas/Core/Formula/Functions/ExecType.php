@@ -27,20 +27,26 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions;
 use \Espo\ORM\Entity;
 use \Espo\Core\Exceptions\Error;
 
-class ExecType extends \Espo\Core\Formula\Functions\Base
+class ExecType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\ContextFunction
 {
-    protected function init()
-    {
-        parent::init();
-		$this->addDependency('formulaManager');
+
+    public function __construct(
+        string $name,
+        \Espo\Core\Formula\Processor $processor,
+        ?\Espo\ORM\Entity $entity,
+        ?\stdClass $variables,
+        protected \Espo\Core\Formula\Manager $formulaManager
+    ) {
+        parent::__construct($name, $processor, $entity, $variables);
     }
+
 
     protected function getFormulaManager()
     {
-        return $this->getInjection('formulaManager');
+        return $this->formulaManager;
     }
 
-    public function process(\StdClass $item)
+    protected function processContext(\stdClass $item): mixed
     {
         if (!property_exists($item, 'value')) {
             return true;
@@ -57,7 +63,7 @@ class ExecType extends \Espo\Core\Formula\Functions\Base
         $formula = $this->evaluate($item->value[0]);
         $variables = $this->getVariables();
         $entity = $this->getEntity();
-		$this->getFormulaManager()->run($formula, $entity, $variables);
+		return $this->getFormulaManager()->run($formula, $entity, $variables);
     }
 }
 

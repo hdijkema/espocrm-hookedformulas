@@ -31,9 +31,9 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions;
 
 use Espo\Core\Exceptions\Error;
 
-class ToStringType extends \Espo\Core\Formula\Functions\AttributeType
+class ToStringType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         if (!property_exists($item, 'value')) {
             throw new Error();

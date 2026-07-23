@@ -31,15 +31,10 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\RecordGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class FindManyType extends \Espo\Core\Formula\Functions\Base
+class FindManyType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\SelectBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('selectManagerFactory');
-    }
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         if (!property_exists($item, 'value')) {
             throw new Error();
@@ -57,7 +52,7 @@ class FindManyType extends \Espo\Core\Formula\Functions\Base
         $orderBy = $this->evaluate($item->value[1]);
         $order = $this->evaluate($item->value[2]) ?? 'asc';
 
-        $selectManager = $this->getInjection('selectManagerFactory')->create($entityType);
+        $selectManager = $this->selectManagerFactory->create($entityType);
         $selectParams = $selectManager->getEmptySelectParams();
 
         if (count($item->value) <= 4) {
@@ -89,11 +84,11 @@ class FindManyType extends \Espo\Core\Formula\Functions\Base
             $selectManager->applyOrder($orderBy, $order, $selectParams);
         }
 
-        $e = $this->getInjection('entityManager')->getRepository($entityType)->select(['id'])->find($selectParams);
+        $e = $this->createSelectBuilderFromParams($entityType, $selectParams, ['id'])->find();
 
         $ids = array();
         foreach($e as $elem) {
-            array_push($ids, $elem->id);
+            array_push($ids, $elem->getId());
         }
 
         return $ids;

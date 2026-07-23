@@ -33,7 +33,7 @@ use Espo\Core\Exceptions\Error;
 
 class CountRelType extends FetchRelatedRecords
 {
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
 
         $result = $this->countRecs($item);

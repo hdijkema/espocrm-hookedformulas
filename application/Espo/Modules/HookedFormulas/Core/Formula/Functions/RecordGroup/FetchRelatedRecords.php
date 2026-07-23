@@ -31,14 +31,8 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\RecordGroup;
 
 use Espo\Core\Exceptions\Error;
 
-abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
+abstract class FetchRelatedRecords extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\MetadataSelectBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('selectManagerFactory');
-        $this->addDependency('metadata');
-    }
 
     protected function fetchRecs(\StdClass $item)
     {
@@ -48,7 +42,7 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
             throw new Error("Formula record\\fetchRelatedMany: Too few arguments.");
         }
 
-        $entityManager = $this->getInjection('entityManager');
+        $entityManager = $this->entityManager;
 
         $entityType = $args[0];
         $id = $args[1];
@@ -87,7 +81,7 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
             return (object) $obj;
         }
 
-        $metadata = $this->getInjection('metadata');
+        $metadata = $this->metadata;
 
         if (!$orderBy) {
             $orderBy = $metadata->get(['entityDefs', $entityType, 'collection', 'orderBy']);
@@ -110,15 +104,15 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
         $foreignLink = $entity->getRelationParam($link, 'foreign');
         if (!$foreignLink) throw new Error("Formula record\\fetchRelatedMany: Not supported link '{$link}'.");
 
-        $selectManager = $this->getInjection('selectManagerFactory')->create($foreignEntityType);
+        $selectManager = $this->selectManagerFactory->create($foreignEntityType);
         $selectParams = $selectManager->getEmptySelectParams();
 
         if ($relationType === 'hasChildren') {
-            $selectParams['whereClause'][] = [$foreignLink . 'Id' => $entity->id];
+            $selectParams['whereClause'][] = [$foreignLink . 'Id' => $entity->getId()];
             $selectParams['whereClause'][] = [$foreignLink . 'Type' => $entity->getEntityType()];
         } else {
             $selectManager->addJoin($foreignLink, $selectParams);
-            $selectParams['whereClause'][] = [$foreignLink . '.id' => $entity->id];
+            $selectParams['whereClause'][] = [$foreignLink . '.id' => $entity->getId()];
         }
 
         $i = 6;
@@ -149,7 +143,7 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
 
 
  	$items = array_map("trim", explode(',', $items));
-        $metadata = $this->getInjection('metadata');
+        $metadata = $this->metadata;
 
         // does an item represent a field with more fields?
         // and are these fields not present in $items?
@@ -172,7 +166,7 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
         }
         $items = array_merge($items, $extend_items);
 
-        $e = $this->getInjection('entityManager')->getRepository($foreignEntityType)->select($items)->find($selectParams);
+        $e = $this->createSelectBuilderFromParams($foreignEntityType, $selectParams, $items)->find();
 
         $obj = [ 'elements' => $e, 'items' => $items ];
 
@@ -187,7 +181,7 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
             throw new Error("Formula countRecs: Too few arguments.");
         }
 
-        $entityManager = $this->getInjection('entityManager');
+        $entityManager = $this->entityManager;
 
         $entityType = $args[0];
         $id = $args[1];
@@ -215,7 +209,7 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
             return [];
         }
 
-        $metadata = $this->getInjection('metadata');
+        $metadata = $this->metadata;
 
         $relationType = $entity->getRelationParam($link, 'type');
 
@@ -229,15 +223,15 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
         $foreignLink = $entity->getRelationParam($link, 'foreign');
         if (!$foreignLink) throw new Error("Formula countRecs: Not supported link '{$link}'.");
 
-        $selectManager = $this->getInjection('selectManagerFactory')->create($foreignEntityType);
+        $selectManager = $this->selectManagerFactory->create($foreignEntityType);
         $selectParams = $selectManager->getEmptySelectParams();
 
         if ($relationType === 'hasChildren') {
-            $selectParams['whereClause'][] = [$foreignLink . 'Id' => $entity->id];
+            $selectParams['whereClause'][] = [$foreignLink . 'Id' => $entity->getId()];
             $selectParams['whereClause'][] = [$foreignLink . 'Type' => $entity->getEntityType()];
         } else {
             $selectManager->addJoin($foreignLink, $selectParams);
-            $selectParams['whereClause'][] = [$foreignLink . '.id' => $entity->id];
+            $selectParams['whereClause'][] = [$foreignLink . '.id' => $entity->getId()];
         }
 
         $i = 3;
@@ -262,10 +256,10 @@ abstract class FetchRelatedRecords extends \Espo\Core\Formula\Functions\Base
             $i = $i + 2;
         }
 
-        $metadata = $this->getInjection('metadata');
+        $metadata = $this->metadata;
 
 	$items = ['id'];
-        $e = $this->getInjection('entityManager')->getRepository($foreignEntityType)->count($selectParams);
+        $e = $this->createSelectBuilderFromParams($foreignEntityType, $selectParams)->count();
         return $e;
     }
 

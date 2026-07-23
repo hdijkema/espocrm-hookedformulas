@@ -31,14 +31,8 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\RecordGroup;
 
 use Espo\Core\Exceptions\Error;
 
-abstract class FetchRecords extends \Espo\Core\Formula\Functions\Base
+abstract class FetchRecords extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\MetadataSelectBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('selectManagerFactory');
-        $this->addDependency('metadata');
-    }
 
     protected function fetchRecs(\StdClass $item)
     {
@@ -59,7 +53,7 @@ abstract class FetchRecords extends \Espo\Core\Formula\Functions\Base
         $orderBy = $this->evaluate($item->value[2]);
         $order = $this->evaluate($item->value[3]) ?? 'asc';
 
-        $selectManager = $this->getInjection('selectManagerFactory')->create($entityType);
+        $selectManager = $this->selectManagerFactory->create($entityType);
         $selectParams = $selectManager->getEmptySelectParams();
 
         $whereClause = [];
@@ -89,7 +83,7 @@ abstract class FetchRecords extends \Espo\Core\Formula\Functions\Base
         }
 
         $items = array_map("trim", explode(',', $items));
-        $metadata = $this->getInjection('metadata');
+        $metadata = $this->metadata;
 
         // does an item represent a field with more fields?
         // and are these fields not present in $items?
@@ -112,7 +106,7 @@ abstract class FetchRecords extends \Espo\Core\Formula\Functions\Base
         }
         $items = array_merge($items, $extend_items);
 
-        $e = $this->getInjection('entityManager')->getRepository($entityType)->select($items)->find($selectParams);
+        $e = $this->createSelectBuilderFromParams($entityType, $selectParams, $items)->find();
 
         $results = [ 'items' => $items, 'elements' => $e ];
 

@@ -33,20 +33,26 @@ use Espo\Core\Exceptions\Error;
 use Espo\Core\Formula\Parser\Ast\Attribute;
 use Espo\Core\Formula\Parser\Ast\Variable;
 
-class LogAddType extends \Espo\Core\Formula\Functions\Base
+class LogAddType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\ContextFunction
 {
-    protected function init()
-    {
-        parent::init();
-        $this->addDependency('config');
+
+    public function __construct(
+        string $name,
+        \Espo\Core\Formula\Processor $processor,
+        ?\Espo\ORM\Entity $entity,
+        ?\stdClass $variables,
+        protected \Espo\Core\Utils\Config $config
+    ) {
+        parent::__construct($name, $processor, $entity, $variables);
     }
+
 
     protected function getConfigManager()
     {
-        return $this->getInjection('config');
+        return $this->config;
     }
 
-    public function process(\StdClass $item)
+    protected function processContext(\stdClass $item): mixed
     {
         if (!property_exists($item, 'value')) {
             return '';
@@ -66,13 +72,15 @@ class LogAddType extends \Espo\Core\Formula\Functions\Base
         foreach ($item->value as $subItem) {
             if ($first) {
 
-               if ($subItem instanceof Attribute) {
+               $data = $this->getArgumentData($subItem);
+
+               if ($data instanceof Attribute) {
                   $type = 'attribute';
-                  $var = $subItem->getName();
+                  $var = $data->getName();
                   $var_value = $this->evaluate($subItem);
-               } else if ($subItem instanceof Variable) {
+               } else if ($data instanceof Variable) {
                   $type = 'variable';
-                  $var = $subItem->getName();
+                  $var = $data->getName();
                   $var_value = $this->evaluate($subItem);
                } else {
                    throw new Error('First argument of \'logAdd\' must be a variable or an entity');

@@ -37,16 +37,17 @@ use Espo\Core\Exceptions\Error;
 # arg3 - entity Id
 #
 
-class HtmlizeType extends \Espo\Core\Formula\Functions\Base
+class HtmlizeType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('serviceFactory');
-        $this->addDependency('htmlizerFactory');
-    }
 
-    public function process(\StdClass $item)
+    public function __construct(
+        protected \Espo\ORM\EntityManager $entityManager,
+        protected \Espo\Core\Htmlizer\HtmlizerFactory $htmlizerFactory
+    ) {}
+
+
+
+    protected function processEvaluated(\stdClass $item): mixed
     {
         $args = $this->fetchArguments($item);
 
@@ -56,7 +57,7 @@ class HtmlizeType extends \Espo\Core\Formula\Functions\Base
         $entity_type = array_shift($args);
         $entity_id = array_shift($args);
 
-        $em = $this->getInjection('entityManager');
+        $em = $this->entityManager;
 
         $entity = $em->getEntity($entity_type, $entity_id);
 
@@ -67,7 +68,7 @@ class HtmlizeType extends \Espo\Core\Formula\Functions\Base
 
     protected function createHtmlizer()
     {
-        return $this->getInjection('htmlizerFactory')->create();
+        return $this->htmlizerFactory->create();
     }
 
 }

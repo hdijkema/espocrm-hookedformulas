@@ -26,15 +26,10 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\RecordGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class RecalculateType extends \Espo\Core\Formula\Functions\Base
+class RecalculateType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\SelectBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-		$this->addDependency('selectManagerFactory');
-    }
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
 		if (!property_exists($item, 'value')) {
 			throw new Error();
@@ -52,6 +47,7 @@ class RecalculateType extends \Espo\Core\Formula\Functions\Base
         if (!is_string($entityType)) throw new Error("Formula record\recalculate: First argument should be a string (entitytype).");
 
 		$data = [];
+        $limit = null;
         $i = 1;
         while ($i < count($item->value) - 1) {
             $condition = $this->evaluate($item->value[$i]);
@@ -59,7 +55,7 @@ class RecalculateType extends \Espo\Core\Formula\Functions\Base
             $value = $this->evaluate($item->value[$i + 1]);
 
 			if ($condition == 'limit by') {
-                $selectParams['limit'] = $value + 0;
+                $limit = $value + 0;
             } else {
                 $data[$condition] = $value;
             }
@@ -67,15 +63,19 @@ class RecalculateType extends \Espo\Core\Formula\Functions\Base
             $i = $i + 2;
         }
 
-        $em = $this->getInjection('entityManager');
-		$sm = $this->getInjection('selectManagerFactory');
+        $em = $this->entityManager;
+		$sm = $this->selectManagerFactory;
 
 		$selectMgr = $sm->create($entityType);
 		$selectParams = $selectMgr->getEmptySelectParams();
 
 		$selectParams['whereClause'] = $data;
 
-		$collection = $em->getRepository($entityType)->find($selectParams);
+        if ($limit !== null) {
+            $selectParams['limit'] = $limit;
+        }
+
+		$collection = $this->createSelectBuilderFromParams($entityType, $selectParams)->find();
 
 		$ok = true;
 		foreach ($collection as $entity) {

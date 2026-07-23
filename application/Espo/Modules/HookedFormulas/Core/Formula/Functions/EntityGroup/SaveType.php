@@ -31,14 +31,16 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\EntityGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class SaveType extends \Espo\Core\Formula\Functions\AttributeType
+class SaveType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-    }
 
-    public function process(\StdClass $item)
+    public function __construct(
+        protected \Espo\ORM\EntityManager $entityManager
+    ) {}
+
+
+
+    protected function processEvaluated(\stdClass $item): mixed
     {
         if (!property_exists($item, 'value')) {
             throw new Error();
@@ -56,7 +58,7 @@ class SaveType extends \Espo\Core\Formula\Functions\AttributeType
 
         if (!$entity) throw new Error("Formula attr: Empty entity.");
 
- 	$entityManager = $this->getInjection('entityManager');
+        $entityManager = $this->entityManager;
         $entityManager->saveEntity($entity);
 
 	return $entity;

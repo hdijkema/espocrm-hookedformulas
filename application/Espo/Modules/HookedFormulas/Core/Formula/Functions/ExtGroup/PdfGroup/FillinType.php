@@ -42,15 +42,10 @@ use mikehaertl\pdftk\Pdf;
 # and arg2 .. n: field, value, etc. 
 #
 
-class FillinType extends \Espo\Core\Formula\Functions\Base
+class FillinType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EntityManagerBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('serviceFactory');
-    }
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         $args = $this->fetchArguments($item);
 
@@ -68,7 +63,7 @@ class FillinType extends \Espo\Core\Formula\Functions\Base
             $fields[$field] = $value;
         }
 
-        $em = $this->getInjection('entityManager');
+        $em = $this->entityManager;
 
         $document = $em->getEntity('Document', $document_id);
 
@@ -130,9 +125,9 @@ class FillinType extends \Espo\Core\Formula\Functions\Base
                 'role' => 'Attachment',
             ]);
 
-            $GLOBALS['log']->warning("Attachment id=" . $attachment->id);
+            $GLOBALS['log']->warning("Attachment id=" . $attachment->getId());
 
-            return $attachment->id;
+            return $attachment->getId();
        } else {
             $GLOBALS['log']->warning("Formula ext\\pdf\\fillin: output filename {$pdf_out_filename} not found.");
             foreach($pdf_errors as $err) {

@@ -31,14 +31,10 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\ExtGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class CopyFileType extends \Espo\Core\Formula\Functions\Base
+class CopyFileType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EntityManagerBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-    }
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
 
         $args = $this->fetchArguments($item);
@@ -50,7 +46,7 @@ class CopyFileType extends \Espo\Core\Formula\Functions\Base
         $entity_id = $entity->get('id');
         $entity_type = $entity->getEntityType();
 
-        $em = $this->getInjection('entityManager');
+        $em = $this->entityManager;
 
         $attachment_from = $em->getEntity('Attachment', $fileId);
         if (!$attachment_from) {
@@ -76,6 +72,6 @@ class CopyFileType extends \Espo\Core\Formula\Functions\Base
                 'role' => 'Attachment',
             ]);
 
-        return $attachment->id;
+        return $attachment->getId();
     }
 }

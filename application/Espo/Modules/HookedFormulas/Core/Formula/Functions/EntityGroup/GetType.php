@@ -32,23 +32,18 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\EntityGroup;
 use Espo\Core\Exceptions\Error;
 use Espo\Services\Record;
 
-class GetType extends \Espo\Core\Formula\Functions\Base
+class GetType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\MetadataEntityManagerBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('metadata');
-    }
 
     private function getEntityManager()
     {
-        $entitymgr = $this->getInjection('entityManager');
+        $entitymgr = $this->entityManager;
         return $entitymgr;
     }
 
     private function getMetadata()
     {
-        return $this->getInjection('metadata');
+        return $this->metadata;
     }
 
 
@@ -107,7 +102,7 @@ class GetType extends \Espo\Core\Formula\Functions\Base
 
 
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         if (!property_exists($item, 'value')) {
             throw new Error();

@@ -31,16 +31,10 @@ namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\EntityGroup;
 
 use Espo\Core\Exceptions\Error;
 
-class GetRelatedType extends \Espo\Core\Formula\Functions\Base
+class GetRelatedType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\MetadataSelectBase
 {
-    protected function init()
-    {
-        $this->addDependency('entityManager');
-        $this->addDependency('selectManagerFactory');
-        $this->addDependency('metadata');
-    }
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
         $args = $this->fetchArguments($item);
 
@@ -48,7 +42,7 @@ class GetRelatedType extends \Espo\Core\Formula\Functions\Base
              throw new Error("Formula entity\\getRelated: Too few arguments.");
         }
 
-        $entityManager = $this->getInjection('entityManager');
+        $entityManager = $this->entityManager;
 
         $entity = $args[0];
         $link = $args[1];
@@ -65,12 +59,12 @@ class GetRelatedType extends \Espo\Core\Formula\Functions\Base
 
         if (!is_int($limit)) throw new Error("Formula entity\\GetRelated: limit should be int.");
 
-        $metadata = $this->getInjection('metadata');
+        $metadata = $this->metadata;
 
         if (!$orderBy) {
-            $orderBy = $metadata->get(['entityDefs', $entityType, 'collection', 'orderBy']);
+            $orderBy = $metadata->get(['entityDefs', $entity->getEntityType(), 'collection', 'orderBy']);
             if (is_null($order)) {
-                $order = $metadata->get(['entityDefs', $entityType, 'collection', 'order']) ?? 'asc';
+                $order = $metadata->get(['entityDefs', $entity->getEntityType(), 'collection', 'order']) ?? 'asc';
             }
         } else {
             $order = $order ?? 'asc';
@@ -88,15 +82,15 @@ class GetRelatedType extends \Espo\Core\Formula\Functions\Base
         $foreignLink = $entity->getRelationParam($link, 'foreign');
         if (!$foreignLink) throw new Error("Formula entity\\getRelated: Not supported link '{$link}'.");
 
-        $selectManager = $this->getInjection('selectManagerFactory')->create($foreignEntityType);
+        $selectManager = $this->selectManagerFactory->create($foreignEntityType);
         $selectParams = $selectManager->getEmptySelectParams();
 
         if ($relationType === 'hasChildren') {
-            $selectParams['whereClause'][] = [$foreignLink . 'Id' => $entity->id];
+            $selectParams['whereClause'][] = [$foreignLink . 'Id' => $entity->getId()];
             $selectParams['whereClause'][] = [$foreignLink . 'Type' => $entity->getEntityType()];
         } else {
             $selectManager->addJoin($foreignLink, $selectParams);
-            $selectParams['whereClause'][] = [$foreignLink . '.id' => $entity->id];
+            $selectParams['whereClause'][] = [$foreignLink . '.id' => $entity->getId()];
         }
 
         if (count($args) <= 6) {
@@ -124,11 +118,11 @@ class GetRelatedType extends \Espo\Core\Formula\Functions\Base
             $selectManager->applyOrder($orderBy, $order, $selectParams);
         }
 
-        $collection = $entityManager->getRepository($foreignEntityType)->select(['id'])->find($selectParams);
+        $collection = $this->createSelectBuilderFromParams($foreignEntityType, $selectParams, ['id'])->find();
 
         $entities = [];   
         foreach ($collection as $e) {
-            $entities[] = $entityManager->getEntity($foreignEntityType, $e->id);
+            $entities[] = $entityManager->getEntity($foreignEntityType, $e->getId());
         }
         return $entities;
     }

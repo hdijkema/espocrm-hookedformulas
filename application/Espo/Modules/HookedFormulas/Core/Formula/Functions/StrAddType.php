@@ -33,9 +33,9 @@ use \Espo\Core\Exceptions\Error;
 use Espo\Core\Formula\Parser\Ast\Attribute;
 use Espo\Core\Formula\Parser\Ast\Variable;
 
-class StrAddType extends \Espo\Core\Formula\Functions\Base
+class StrAddType extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\ContextFunction
 {
-    public function process(\StdClass $item)
+    protected function processContext(\stdClass $item): mixed
     {
         if (!property_exists($item, 'value')) {
             return '';
@@ -52,13 +52,15 @@ class StrAddType extends \Espo\Core\Formula\Functions\Base
 
         foreach ($item->value as $subItem) {
             if ($first) {
-               if ($subItem instanceof Attribute) {
+               $data = $this->getArgumentData($subItem);
+
+               if ($data instanceof Attribute) {
                   $type = 'attribute';
-                  $var = $subItem->getName();
+                  $var = $data->getName();
                   $var_value = $this->evaluate($subItem);
-               } else if ($subItem instanceof Variable) {
+               } else if ($data instanceof Variable) {
                   $type = 'variable';
-                  $var = $subItem->getName();
+                  $var = $data->getName();
                   $var_value = $this->evaluate($subItem);
                } else {
                    throw new Error('First argument of \'strAdd\' must be a variable or an entity');

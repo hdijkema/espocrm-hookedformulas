@@ -1,7 +1,7 @@
 #!/bin/bash
 # vi: set sw=4 ts=4:
 
-INSTALL_PREFIX=~/crm
+INSTALL_PREFIX="${CRM_DIR:-$HOME/crm}"
 INSTALL_FILES="$INSTALL_PREFIX/data/installed"
 
 function usage()

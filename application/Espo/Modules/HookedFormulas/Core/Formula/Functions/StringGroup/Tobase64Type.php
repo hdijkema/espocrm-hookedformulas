@@ -29,17 +29,12 @@
 
 namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\StringGroup;
 
-use Espo\Core\Formula\{
-    Functions\BaseFunction,
-    ArgumentList,
-};
 
-class Tobase64Type extends BaseFunction
+
+class Tobase64Type extends \Espo\Modules\HookedFormulas\Core\Formula\Functions\Base\EvaluatedFunction
 {
-    public function process(ArgumentList $args)
+    protected function processEvaluated(\stdClass $item): mixed
     {
-        $hash = $this->evaluate($args[0]);
-
-	    return base64_encode($hash);
+        return base64_encode($item->value[0] ?? '');
     }
 }

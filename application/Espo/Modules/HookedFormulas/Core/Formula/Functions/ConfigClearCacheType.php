@@ -34,8 +34,10 @@ use \Espo\Core\Exceptions\Error;
 class ConfigClearCacheType extends Config
 {
 
-    public function process(\StdClass $item)
+    protected function processEvaluated(\stdClass $item): mixed
     {
-    	parent::clearCache();
+        parent::clearCache();
+
+        return null;
     }
 }
