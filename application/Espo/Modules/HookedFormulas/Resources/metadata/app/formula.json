@@ -112,6 +112,11 @@
 			"returnType": "null"
 		},
 		{
+			"name": "espo\\info",
+			"insertText": "espo\\info(ITEM)",
+			"returnType": "string"
+		},
+		{
 			"name": "array\\set",
 			"insertText": "array\\set(ARRAY, INDEX, VALUE)",
 			"returnType": "string"
@@ -328,7 +333,12 @@
 		"configSet": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigSetType",
 		"ConfigClearCache": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigClearCacheType",
 		"configClearCache": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ConfigClearCacheType",
-    
+
+		"Espo\\Info": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EspoGroup\\InfoType",
+		"Espo\\info": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EspoGroup\\InfoType",
+		"espo\\Info": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EspoGroup\\InfoType",
+		"espo\\info": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\EspoGroup\\InfoType",
+
 		"Array\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
 		"array\\Set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",
 		"Array\\set": "\\Espo\\Modules\\HookedFormulas\\Core\\Formula\\Functions\\ArrayGroup\\SetType",

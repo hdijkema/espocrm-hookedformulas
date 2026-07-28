@@ -23,16 +23,40 @@
  *
  ************************************************************************/
 
-namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\RecordGroup;
+namespace Espo\Modules\HookedFormulas\Core\Formula\Functions\EspoGroup;
 
-use Espo\Core\Exceptions\Error;
+use Espo\Core\Formula\EvaluatedArgumentList;
+use Espo\Core\Formula\Exceptions\BadArgumentType;
+use Espo\Core\Formula\Exceptions\BadArgumentValue;
+use Espo\Core\Formula\Exceptions\TooFewArguments;
+use Espo\Core\Formula\Func;
+use Espo\Core\Utils\Config;
 
-class CountRelType extends FetchRelatedRecords
+class InfoType implements Func
 {
-    protected function processEvaluated(\stdClass $item): mixed
-    {
+    public function __construct(
+        private Config $config
+    ) {}
 
-        $result = $this->countRecs($item);
-        return $result;
+    public function process(EvaluatedArgumentList $arguments): mixed
+    {
+        if (count($arguments) < 1) {
+            throw TooFewArguments::create(1);
+        }
+
+        $item = $arguments[0];
+
+        if (!is_string($item)) {
+            throw BadArgumentType::create(1, 'string');
+        }
+
+        return match ($item) {
+            'version' => $this->config->get('version'),
+            'phpVersion' => PHP_VERSION,
+            default => throw BadArgumentValue::create(
+                1,
+                "Unknown Espo information item '$item'."
+            ),
+        };
     }
 }
